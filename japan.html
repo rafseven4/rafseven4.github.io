@@ -296,6 +296,76 @@
       font-size: 1.2rem; font-style: italic; color: var(--accent);
     }
 
+    /* ── MUSIC PLAYER ── */
+    #music-player {
+      position: fixed;
+      bottom: 32px;
+      left: 32px;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(12,12,14,0.92);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+      border-radius: 50px;
+      padding: 10px 20px 10px 10px;
+      transition: all 0.3s ease;
+    }
+    #music-player:hover { border-color: rgba(201,169,110,0.3); }
+
+    .player-btn {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--accent); border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: transform 0.2s, background 0.2s;
+    }
+    .player-btn:hover { transform: scale(1.1); }
+    .player-btn svg { width: 14px; height: 14px; fill: #1a1208; }
+
+    .player-info { min-width: 0; }
+    .player-title {
+      font-size: 11px; font-weight: 500; color: var(--text);
+      letter-spacing: 0.06em; white-space: nowrap;
+      overflow: hidden; text-overflow: ellipsis; max-width: 160px;
+    }
+    .player-sub {
+      font-size: 10px; color: var(--muted); letter-spacing: 0.08em;
+      margin-top: 2px;
+    }
+
+    .player-bars {
+      display: flex; align-items: flex-end; gap: 2px; height: 16px;
+    }
+    .bar {
+      width: 3px; background: var(--accent); border-radius: 2px;
+      transform-origin: bottom;
+    }
+    .bar:nth-child(1) { animation: bar1 0.8s ease-in-out infinite; }
+    .bar:nth-child(2) { animation: bar2 0.6s ease-in-out infinite; }
+    .bar:nth-child(3) { animation: bar3 0.9s ease-in-out infinite; }
+    .bar:nth-child(4) { animation: bar1 0.7s ease-in-out infinite; }
+    .player-bars.paused .bar { animation-play-state: paused; height: 3px !important; }
+
+    @keyframes bar1 { 0%,100%{height:4px} 50%{height:14px} }
+    @keyframes bar2 { 0%,100%{height:10px} 50%{height:4px} }
+    @keyframes bar3 { 0%,100%{height:7px} 50%{height:14px} }
+
+    .player-vol {
+      display: flex; align-items: center; gap: 6px;
+      border-left: 1px solid var(--border); padding-left: 14px;
+    }
+    .player-vol svg { width: 12px; height: 12px; fill: var(--muted); flex-shrink: 0; }
+    #vol-slider {
+      -webkit-appearance: none; appearance: none;
+      width: 60px; height: 3px;
+      background: var(--border); border-radius: 2px; outline: none; cursor: pointer;
+    }
+    #vol-slider::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 10px; height: 10px;
+      border-radius: 50%; background: var(--accent); cursor: pointer;
+    }
+
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border);
@@ -602,6 +672,61 @@
   <span>Japan · April 2024</span>
   <span>rafseven4</span>
 </footer>
+
+<!-- MUSIC PLAYER -->
+<div id="music-player">
+  <button class="player-btn" id="play-btn" title="Play / Pause">
+    <svg id="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+    <svg id="pause-icon" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+  </button>
+  <div class="player-info">
+    <div class="player-title">Japanese Ambient</div>
+    <div class="player-sub">Traditional · Instrumental</div>
+  </div>
+  <div class="player-bars paused" id="bars">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
+  <div class="player-vol">
+    <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+    <input type="range" id="vol-slider" min="0" max="1" step="0.05" value="0.5"/>
+  </div>
+</div>
+
+<audio id="japan-audio" loop>
+  <source src="https://archive.org/download/RelaxingInstrumentalAsianMusicJapaneseMusicOrientalMusic/Relaxing%20Instrumental%20Asian%20Music%20-%20Japanese%20Music%20-%20Oriental%20Music.mp3" type="audio/mpeg"/>
+</audio>
+
+<script>
+  const audio    = document.getElementById('japan-audio');
+  const playBtn  = document.getElementById('play-btn');
+  const playIcon = document.getElementById('play-icon');
+  const pauseIcon= document.getElementById('pause-icon');
+  const bars     = document.getElementById('bars');
+  const volSlider= document.getElementById('vol-slider');
+
+  audio.volume = 0.5;
+
+  playBtn.addEventListener('click', () => {
+    if (audio.paused) {
+      audio.play();
+      playIcon.style.display  = 'none';
+      pauseIcon.style.display = 'block';
+      bars.classList.remove('paused');
+    } else {
+      audio.pause();
+      playIcon.style.display  = 'block';
+      pauseIcon.style.display = 'none';
+      bars.classList.add('paused');
+    }
+  });
+
+  volSlider.addEventListener('input', () => {
+    audio.volume = volSlider.value;
+  });
+</script>
 
 </body>
 </html>
