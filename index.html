@@ -217,7 +217,7 @@
 <script>
 const destinations = [
   { name:"Brazil",                            continent:"Americas", note:"Home",               wide:true,  img:"https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=1200&q=80" },
-  { name:"Japan",                             continent:"Asia",     note:"Tokyo & Kyoto",      wide:true,  img:"https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=1200&q=80" },
+  { name:"Japan",                             continent:"Asia",     note:"Tokyo & Kyoto",      wide:true,  img:"https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=1200&q=80", link:"japan.html" },
   { name:"United States of America",          continent:"Americas", note:"USA",                            img:"https://images.unsplash.com/photo-1534430480872-3498386e7856?w=800&q=80" },
   { name:"United Kingdom",                    continent:"Europe",   note:"London",                         img:"https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&q=80" },
   { name:"France",                            continent:"Europe",   note:"Paris",                          img:"https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80" },
@@ -305,8 +305,9 @@ function buildGrid(filter) {
       <div class="dest-overlay">
         <div class="dest-tag">${d.continent}</div>
         <div class="dest-name">${d.name}</div>
-        <div class="dest-sub">${d.note}</div>
+        <div class="dest-sub">${d.note}${d.link ? ' <span style="color:var(--accent);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;display:block;margin-top:6px;">View memories →</span>' : ''}</div>
       </div>`;
+    if (d.link) { card.style.cursor = 'pointer'; card.addEventListener('click', () => window.location.href = d.link); }
     grid.appendChild(card);
   });
   countEl.textContent = count + ' visited';
