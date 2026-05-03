@@ -3,154 +3,348 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Travel Map</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <title>rafseven4 — Places I've Been</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Syne:wght@400;500;700&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --ink: #1a1814;
-      --paper: #f5f2eb;
-      --accent: #c0392b;
-      --muted: #8c8479;
-      --visited: #7F77DD;
-      --visited-hover: #534AB7;
-      --border: rgba(26,24,20,0.12);
+      --bg: #0a0a0b;
+      --surface: #111114;
+      --card: #16161a;
+      --border: rgba(255,255,255,0.07);
+      --text: #e8e4da;
+      --muted: #7a7670;
+      --accent: #c9a96e;
+      --accent2: #7F77DD;
     }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--paper);
-      color: var(--ink);
-      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      font-weight: 400;
+      overflow-x: hidden;
     }
 
-    header {
-      padding: 48px 40px 24px;
-      border-bottom: 1px solid var(--border);
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 48px;
+      background: linear-gradient(to bottom, rgba(10,10,11,0.95) 0%, transparent 100%);
+    }
+
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .logo span { color: var(--accent); font-style: italic; }
+
+    nav ul {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--text); }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
       display: flex;
       align-items: flex-end;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
+      overflow: hidden;
     }
 
-    header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to top, rgba(10,10,11,1) 0%, rgba(10,10,11,0.3) 50%, rgba(10,10,11,0.1) 100%),
+        url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1800&q=80') center/cover no-repeat;
     }
 
-    header p {
-      font-size: 14px;
-      color: var(--muted);
-      max-width: 280px;
-      text-align: right;
-      line-height: 1.6;
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 48px 80px;
+      max-width: 700px;
     }
 
-    .stats {
-      display: flex;
-      gap: 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .stat {
-      flex: 1;
-      padding: 20px 40px;
-      border-right: 1px solid var(--border);
-    }
-    .stat:last-child { border-right: none; }
-
-    .stat-number {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      font-weight: 600;
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
       color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      font-weight: 300;
+      line-height: 0.95;
+      letter-spacing: -0.01em;
+      margin-bottom: 28px;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-desc {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 420px;
+      margin-bottom: 40px;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+    }
+
+    .hero-stat-n {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 300;
+      color: var(--text);
       line-height: 1;
     }
 
-    .stat-label {
-      font-size: 12px;
-      color: var(--muted);
+    .hero-stat-l {
+      font-size: 10px;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-top: 4px;
+      color: var(--muted);
+      margin-top: 6px;
     }
 
-    .map-section {
-      padding: 32px 40px 0;
+    .scroll-hint {
+      position: absolute;
+      bottom: 40px;
+      right: 48px;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
     }
+
+    .scroll-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, var(--muted), transparent);
+      animation: scrollpulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollpulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.1); }
+    }
+
+    /* SECTION */
+    section { padding: 100px 48px; }
+
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 48px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
+    }
+
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 300;
+    }
+
+    .section-count {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    /* DESTINATION GRID */
+    .dest-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2px;
+    }
+
+    .dest-card {
+      position: relative;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--card);
+    }
+
+    .dest-card:first-child {
+      grid-column: span 2;
+      aspect-ratio: 16/9;
+    }
+
+    .dest-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
+      filter: brightness(0.75);
+    }
+
+    .dest-card:hover .dest-img {
+      transform: scale(1.06);
+      filter: brightness(0.9);
+    }
+
+    .dest-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,10,11,0.85) 0%, transparent 55%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 28px;
+    }
+
+    .dest-tag {
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .dest-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 300;
+      line-height: 1.1;
+    }
+
+    .dest-sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    /* MAP SECTION */
+    #map-section { background: var(--surface); }
 
     #map { width: 100%; }
     #map svg { display: block; width: 100%; }
-
-    .country-visited {
-      fill: var(--visited);
-      cursor: pointer;
-      transition: fill 0.15s;
-    }
-    .country-visited:hover { fill: var(--visited-hover); }
-    .country-default { fill: #d4cfc5; stroke: #f5f2eb; stroke-width: 0.5; }
+    .country-visited { fill: var(--accent2); cursor: pointer; transition: fill 0.15s; }
+    .country-visited:hover { fill: #534AB7; }
+    .country-default { fill: #1e1e24; }
 
     #tooltip {
       position: fixed;
-      background: var(--ink);
-      color: var(--paper);
-      border-radius: 6px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 4px;
       padding: 6px 14px;
-      font-size: 13px;
-      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-family: 'Syne', sans-serif;
       pointer-events: none;
       opacity: 0;
       transition: opacity 0.1s;
       white-space: nowrap;
-      z-index: 100;
+      z-index: 200;
+      letter-spacing: 0.05em;
     }
 
-    .places-section {
-      padding: 24px 40px 48px;
-      border-top: 1px solid var(--border);
-      margin-top: 24px;
-    }
-
-    .places-label {
-      font-size: 11px;
+    /* PILLS */
+    .pills-wrap { margin-top: 40px; }
+    .pills-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
       color: var(--muted);
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
-
     .pills {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
     }
-
     .pill {
-      background: transparent;
-      border: 1px solid var(--visited);
-      color: var(--visited-hover);
+      border: 1px solid var(--border);
+      color: var(--muted);
       border-radius: 100px;
-      padding: 5px 16px;
-      font-size: 13px;
-      font-family: 'DM Sans', sans-serif;
+      padding: 6px 18px;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      transition: border-color 0.2s, color 0.2s;
       cursor: default;
-      transition: background 0.15s;
     }
-
     .pill:hover {
-      background: var(--visited);
-      color: #fff;
+      border-color: var(--accent);
+      color: var(--accent);
     }
 
-    @media (max-width: 600px) {
-      header, .stat, .map-section, .places-section { padding-left: 20px; padding-right: 20px; }
-      header p { text-align: left; }
-      .stat { padding: 16px 20px; }
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+    }
+
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+
+    @media (max-width: 640px) {
+      nav { padding: 20px 24px; }
+      nav ul { display: none; }
+      .hero-content { padding: 0 24px 60px; }
+      section { padding: 60px 24px; }
+      .dest-card:first-child { grid-column: span 1; aspect-ratio: 3/4; }
+      footer { padding: 32px 24px; flex-direction: column; gap: 12px; text-align: center; }
+      .scroll-hint { right: 24px; }
     }
   </style>
 </head>
@@ -158,72 +352,174 @@
 
 <div id="tooltip"></div>
 
-<header>
-  <h1>Places I've<br>been to</h1>
-  <p>Every country I've set foot in, marked on the map.</p>
-</header>
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">raf<span>seven4</span></a>
+  <ul>
+    <li><a href="#destinations">Places</a></li>
+    <li><a href="#map-section">Map</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+</nav>
 
-<div class="stats">
-  <div class="stat">
-    <div class="stat-number" id="cnt">5</div>
-    <div class="stat-label">Countries</div>
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">A life in motion</p>
+    <h1 class="hero-title">Places<br>I've <em>been</em><br>to</h1>
+    <p class="hero-desc">A personal record of every country I've set foot in. From the beaches of Brazil to the streets of Paris — the world is a book and I'm still reading.</p>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-n" id="hero-cnt">5</div>
+        <div class="hero-stat-l">Countries</div>
+      </div>
+      <div>
+        <div class="hero-stat-n">3</div>
+        <div class="hero-stat-l">Continents</div>
+      </div>
+      <div>
+        <div class="hero-stat-n">3%</div>
+        <div class="hero-stat-l">Of the world</div>
+      </div>
+    </div>
   </div>
-  <div class="stat">
-    <div class="stat-number" id="pct">3%</div>
-    <div class="stat-label">Of the world</div>
-  </div>
-  <div class="stat">
-    <div class="stat-number">3</div>
-    <div class="stat-label">Continents</div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    scroll
   </div>
 </div>
 
-<div class="map-section">
+<!-- DESTINATIONS -->
+<section id="destinations">
+  <div class="section-header">
+    <div>
+      <div class="section-label">Destinations</div>
+      <h2 class="section-title">Every place,<br>a memory</h2>
+    </div>
+    <span class="section-count">5 visited</span>
+  </div>
+
+  <div class="dest-grid">
+
+    <div class="dest-card">
+      <img class="dest-img" src="https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=1200&q=80" alt="Brazil"/>
+      <div class="dest-overlay">
+        <div class="dest-tag">Home</div>
+        <div class="dest-name">Brazil</div>
+        <div class="dest-sub">South America</div>
+      </div>
+    </div>
+
+    <div class="dest-card">
+      <img class="dest-img" src="https://images.unsplash.com/photo-1589909202802-8f4aadce1849?w=800&q=80" alt="Argentina"/>
+      <div class="dest-overlay">
+        <div class="dest-tag">South America</div>
+        <div class="dest-name">Argentina</div>
+        <div class="dest-sub">Buenos Aires</div>
+      </div>
+    </div>
+
+    <div class="dest-card">
+      <img class="dest-img" src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&q=80" alt="USA"/>
+      <div class="dest-overlay">
+        <div class="dest-tag">North America</div>
+        <div class="dest-name">United States</div>
+        <div class="dest-sub">The Americas</div>
+      </div>
+    </div>
+
+    <div class="dest-card">
+      <img class="dest-img" src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80" alt="France"/>
+      <div class="dest-overlay">
+        <div class="dest-tag">Europe</div>
+        <div class="dest-name">France</div>
+        <div class="dest-sub">Paris</div>
+      </div>
+    </div>
+
+    <div class="dest-card">
+      <img class="dest-img" src="https://images.unsplash.com/photo-1588001400947-6385aef4ab0e?w=800&q=80" alt="Portugal"/>
+      <div class="dest-overlay">
+        <div class="dest-tag">Europe</div>
+        <div class="dest-name">Portugal</div>
+        <div class="dest-sub">Lisbon</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- MAP -->
+<section id="map-section">
+  <div class="section-header">
+    <div>
+      <div class="section-label">World Map</div>
+      <h2 class="section-title">Where I've<br>landed</h2>
+    </div>
+  </div>
+
   <div id="map"></div>
-</div>
 
-<div class="places-section">
-  <div class="places-label">Visited places</div>
-  <div class="pills" id="pills"></div>
-</div>
+  <div class="pills-wrap">
+    <div class="pills-label">All visited countries</div>
+    <div class="pills" id="pills"></div>
+  </div>
+</section>
 
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header">
+    <div>
+      <div class="section-label">About</div>
+      <h2 class="section-title">The traveller</h2>
+    </div>
+  </div>
+  <p style="max-width:560px; color:var(--muted); line-height:1.9; font-size:15px;">
+    This is my personal travel log — a visual record of every country I've visited. Each place has shaped how I see the world. This site is a living document; as I travel more, it grows with me.
+  </p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>rafseven4 &copy; 2026</span>
+  <a href="https://github.com/rafseven4">github.com/rafseven4</a>
+</footer>
+
+<!-- MAP SCRIPTS -->
 <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
 <script>
   const visited = {
-    "Brazil":                    "Home",
-    "Argentina":                 "Buenos Aires",
-    "United States of America":  "USA",
-    "France":                    "Paris",
-    "Portugal":                  "Lisbon",
+    "Brazil":                   "Home",
+    "Argentina":                "Buenos Aires",
+    "United States of America": "USA",
+    "France":                   "Paris",
+    "Portugal":                 "Lisbon",
   };
 
-  const tip = document.getElementById('tooltip');
+  const tip   = document.getElementById('tooltip');
   const pills = document.getElementById('pills');
 
   Object.entries(visited).forEach(([name, note]) => {
     const p = document.createElement('span');
     p.className = 'pill';
-    p.textContent = note || name;
+    p.textContent = note && note !== name ? name + ' — ' + note : name;
     pills.appendChild(p);
   });
 
-  document.getElementById('cnt').textContent = Object.keys(visited).length;
-  document.getElementById('pct').textContent = Math.round(Object.keys(visited).length / 195 * 100) + '%';
-
-  const svg = d3.select('#map').append('svg').attr('viewBox', '0 0 960 500').attr('width', '100%');
-  const proj = d3.geoNaturalEarth1().scale(158).translate([480, 260]);
+  const svg  = d3.select('#map').append('svg').attr('viewBox','0 0 960 500').attr('width','100%');
+  const proj = d3.geoNaturalEarth1().scale(158).translate([480,260]);
   const path = d3.geoPath(proj);
 
   d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(world => {
     const features = topojson.feature(world, world.objects.countries).features;
-
     svg.selectAll('path')
       .data(features)
       .join('path')
       .attr('d', path)
       .attr('class', d => visited[d.properties?.name] ? 'country-visited' : 'country-default')
-      .attr('stroke', '#f5f2eb')
+      .attr('stroke', '#0a0a0b')
       .attr('stroke-width', 0.5)
       .on('mousemove', function(event, d) {
         const name = d.properties?.name || '';
@@ -231,7 +527,7 @@
         tip.style.left = (event.clientX + 14) + 'px';
         tip.style.top  = (event.clientY - 32) + 'px';
         tip.style.opacity = '1';
-        tip.textContent = visited[name] ? name + (visited[name] !== name ? ' — ' + visited[name] : '') : name;
+        tip.textContent = visited[name] ? name + ' — ' + visited[name] : name;
       })
       .on('mouseleave', () => { tip.style.opacity = '0'; });
   });
