@@ -145,7 +145,7 @@
     <h1 class="hero-title">Places<br>I've <em>been</em><br>to</h1>
     <p class="hero-desc">A personal record of every country I've set foot in — spanning 6 continents, from the jungles of Central Africa to the temples of Japan.</p>
     <div class="hero-stats">
-      <div><div class="hero-stat-n">55</div><div class="hero-stat-l">Countries</div></div>
+      <div><div class="hero-stat-n">54</div><div class="hero-stat-l">Countries</div></div>
       <div><div class="hero-stat-n">6</div><div class="hero-stat-l">Continents</div></div>
       <div><div class="hero-stat-n">28%</div><div class="hero-stat-l">Of the world</div></div>
     </div>
@@ -159,7 +159,7 @@
       <div class="section-label">Destinations</div>
       <h2 class="section-title">Every place,<br>a memory</h2>
     </div>
-    <span class="section-count" id="visible-count">51 visited</span>
+    <span class="section-count" id="visible-count" style="display:none">54 visited</span>
   </div>
   <div class="filters">
     <button class="filter-btn active" data-filter="all">All</button>
@@ -235,7 +235,6 @@ const destinations = [
   { name:"Greece",                            continent:"Europe",   note:"Santorini",                      img:"https://images.unsplash.com/photo-1555993539-1732b0258235?w=800&q=80" },
   { name:"Canada",                            continent:"Americas", note:"Toronto",                        img:"https://images.unsplash.com/photo-1517935706615-2717063c2225?w=800&q=80" },
   { name:"Mexico",                            continent:"Americas", note:"Mexico City",                    img:"https://images.unsplash.com/photo-1518105779142-d975f22f1b0a?w=800&q=80" },
-  { name:"Argentina",                         continent:"Americas", note:"Buenos Aires",                   img:"https://images.unsplash.com/photo-1589909202802-8f4aadce1849?w=800&q=80" },
   { name:"Nigeria",                           continent:"Africa",   note:"Lagos",                          img:"https://images.unsplash.com/photo-1618767689160-da3fb810aad7?w=800&q=80" },
   { name:"Angola",                            continent:"Africa",   note:"Luanda",                         img:"https://images.unsplash.com/photo-1609198092458-38a293c7ac4b?w=800&q=80" },
   { name:"Norway",                            continent:"Europe",   note:"Fjords",             wide:true,  img:"https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=1200&q=80" },
@@ -276,6 +275,10 @@ const mapLookup = {
   "Czechia (Czech Republic)":          "Czechia",
   "Ivory Coast":                       "Côte d'Ivoire",
   "Democratic Republic of the Congo":  "Dem. Rep. Congo",
+  "Dominican Republic":                "Dominican Rep.",
+  "Guadeloupe":                        "Guadeloupe",
+  "Martinique":                        "Martinique",
+  "Puerto Rico":                       "Puerto Rico",
   "Qatar":                             "Qatar",
 };
 
