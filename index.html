@@ -7,7 +7,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Syne:wght@400;500;700&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
       --bg: #0a0a0b;
       --surface: #111114;
@@ -18,322 +17,74 @@
       --accent: #c9a96e;
       --accent2: #7F77DD;
     }
-
     html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Syne', sans-serif; overflow-x: hidden; }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Syne', sans-serif;
-      font-weight: 400;
-      overflow-x: hidden;
-    }
-
-    /* NAV */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
       padding: 24px 48px;
       background: linear-gradient(to bottom, rgba(10,10,11,0.95) 0%, transparent 100%);
     }
-
-    .logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.4rem;
-      font-weight: 300;
-      letter-spacing: 0.12em;
-      color: var(--text);
-      text-decoration: none;
-    }
-
+    .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 300; letter-spacing: 0.12em; color: var(--text); text-decoration: none; }
     .logo span { color: var(--accent); font-style: italic; }
-
-    nav ul {
-      display: flex;
-      gap: 36px;
-      list-style: none;
-    }
-
-    nav a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 12px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
+    nav ul { display: flex; gap: 36px; list-style: none; }
+    nav a { color: var(--muted); text-decoration: none; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.2s; }
     nav a:hover { color: var(--text); }
 
-    /* HERO */
-    .hero {
-      position: relative;
-      height: 100vh;
-      min-height: 600px;
-      display: flex;
-      align-items: flex-end;
-      overflow: hidden;
-    }
-
+    .hero { position: relative; height: 100vh; min-height: 600px; display: flex; align-items: flex-end; overflow: hidden; }
     .hero-bg {
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background:
         linear-gradient(to top, rgba(10,10,11,1) 0%, rgba(10,10,11,0.3) 50%, rgba(10,10,11,0.1) 100%),
         url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1800&q=80') center/cover no-repeat;
     }
+    .hero-content { position: relative; z-index: 2; padding: 0 48px 80px; max-width: 700px; }
+    .hero-eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+    .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(3.5rem, 8vw, 7rem); font-weight: 300; line-height: 0.95; letter-spacing: -0.01em; margin-bottom: 28px; }
+    .hero-title em { font-style: italic; color: var(--accent); }
+    .hero-desc { font-size: 15px; color: var(--muted); line-height: 1.7; max-width: 420px; margin-bottom: 40px; }
+    .hero-stats { display: flex; gap: 40px; flex-wrap: wrap; }
+    .hero-stat-n { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300; color: var(--text); line-height: 1; }
+    .hero-stat-l { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
+    .scroll-hint { position: absolute; bottom: 40px; right: 48px; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--muted); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; }
+    .scroll-line { width: 1px; height: 48px; background: linear-gradient(to bottom, var(--muted), transparent); animation: scrollpulse 2s ease-in-out infinite; }
+    @keyframes scrollpulse { 0%,100%{opacity:.3;transform:scaleY(1)} 50%{opacity:1;transform:scaleY(1.1)} }
 
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      padding: 0 48px 80px;
-      max-width: 700px;
-    }
-
-    .hero-eyebrow {
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 20px;
-    }
-
-    .hero-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3.5rem, 8vw, 7rem);
-      font-weight: 300;
-      line-height: 0.95;
-      letter-spacing: -0.01em;
-      margin-bottom: 28px;
-    }
-
-    .hero-title em {
-      font-style: italic;
-      color: var(--accent);
-    }
-
-    .hero-desc {
-      font-size: 15px;
-      color: var(--muted);
-      line-height: 1.7;
-      max-width: 420px;
-      margin-bottom: 40px;
-    }
-
-    .hero-stats {
-      display: flex;
-      gap: 40px;
-    }
-
-    .hero-stat-n {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.8rem;
-      font-weight: 300;
-      color: var(--text);
-      line-height: 1;
-    }
-
-    .hero-stat-l {
-      font-size: 10px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-top: 6px;
-    }
-
-    .scroll-hint {
-      position: absolute;
-      bottom: 40px;
-      right: 48px;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      color: var(--muted);
-      font-size: 10px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-    }
-
-    .scroll-line {
-      width: 1px;
-      height: 48px;
-      background: linear-gradient(to bottom, var(--muted), transparent);
-      animation: scrollpulse 2s ease-in-out infinite;
-    }
-
-    @keyframes scrollpulse {
-      0%, 100% { opacity: 0.3; transform: scaleY(1); }
-      50% { opacity: 1; transform: scaleY(1.1); }
-    }
-
-    /* SECTION */
     section { padding: 100px 48px; }
+    .section-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 48px; border-bottom: 1px solid var(--border); padding-bottom: 24px; flex-wrap: wrap; gap: 12px; }
+    .section-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; }
+    .section-count { font-size: 11px; color: var(--muted); letter-spacing: 0.1em; }
 
-    .section-header {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      margin-bottom: 48px;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 24px;
-    }
+    .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+    .filter-btn { background: transparent; border: 1px solid var(--border); color: var(--muted); border-radius: 100px; padding: 6px 18px; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; font-family: 'Syne', sans-serif; transition: all 0.2s; }
+    .filter-btn:hover, .filter-btn.active { border-color: var(--accent); color: var(--accent); }
 
-    .section-label {
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 10px;
-    }
+    .dest-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 2px; }
+    .dest-card { position: relative; aspect-ratio: 3/4; overflow: hidden; cursor: pointer; background: var(--card); }
+    .dest-card.wide { grid-column: span 2; aspect-ratio: 16/9; }
+    .dest-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94); filter: brightness(0.7); }
+    .dest-card:hover .dest-img { transform: scale(1.06); filter: brightness(0.9); }
+    .dest-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,10,11,0.88) 0%, transparent 55%); display: flex; flex-direction: column; justify-content: flex-end; padding: 24px; }
+    .dest-tag { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+    .dest-name { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; line-height: 1.1; }
+    .dest-sub { font-size: 11px; color: var(--muted); margin-top: 5px; }
 
-    .section-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 300;
-    }
-
-    .section-count {
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 0.1em;
-    }
-
-    /* DESTINATION GRID */
-    .dest-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 2px;
-    }
-
-    .dest-card {
-      position: relative;
-      aspect-ratio: 3/4;
-      overflow: hidden;
-      cursor: pointer;
-      background: var(--card);
-    }
-
-    .dest-card:first-child {
-      grid-column: span 2;
-      aspect-ratio: 16/9;
-    }
-
-    .dest-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
-      filter: brightness(0.75);
-    }
-
-    .dest-card:hover .dest-img {
-      transform: scale(1.06);
-      filter: brightness(0.9);
-    }
-
-    .dest-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(10,10,11,0.85) 0%, transparent 55%);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 28px;
-    }
-
-    .dest-tag {
-      font-size: 9px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 8px;
-    }
-
-    .dest-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.6rem;
-      font-weight: 300;
-      line-height: 1.1;
-    }
-
-    .dest-sub {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 6px;
-    }
-
-    /* MAP SECTION */
     #map-section { background: var(--surface); }
-
-    #map { width: 100%; }
     #map svg { display: block; width: 100%; }
     .country-visited { fill: var(--accent2); cursor: pointer; transition: fill 0.15s; }
     .country-visited:hover { fill: #534AB7; }
     .country-default { fill: #1e1e24; }
+    #tooltip { position: fixed; background: var(--surface); border: 1px solid var(--border); color: var(--text); border-radius: 4px; padding: 6px 14px; font-size: 12px; font-family: 'Syne', sans-serif; pointer-events: none; opacity: 0; transition: opacity 0.1s; white-space: nowrap; z-index: 200; letter-spacing: 0.05em; }
 
-    #tooltip {
-      position: fixed;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text);
-      border-radius: 4px;
-      padding: 6px 14px;
-      font-size: 12px;
-      font-family: 'Syne', sans-serif;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.1s;
-      white-space: nowrap;
-      z-index: 200;
-      letter-spacing: 0.05em;
-    }
-
-    /* PILLS */
     .pills-wrap { margin-top: 40px; }
-    .pills-label {
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 16px;
-    }
-    .pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .pill {
-      border: 1px solid var(--border);
-      color: var(--muted);
-      border-radius: 100px;
-      padding: 6px 18px;
-      font-size: 12px;
-      letter-spacing: 0.06em;
-      transition: border-color 0.2s, color 0.2s;
-      cursor: default;
-    }
-    .pill:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
+    .pills-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+    .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pill { border: 1px solid var(--border); color: var(--muted); border-radius: 100px; padding: 5px 16px; font-size: 12px; letter-spacing: 0.05em; transition: border-color 0.2s, color 0.2s; cursor: default; }
+    .pill:hover { border-color: var(--accent); color: var(--accent); }
 
-    /* FOOTER */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 40px 48px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      color: var(--muted);
-      font-size: 12px;
-      letter-spacing: 0.06em;
-    }
-
+    footer { border-top: 1px solid var(--border); padding: 40px 48px; display: flex; align-items: center; justify-content: space-between; color: var(--muted); font-size: 12px; letter-spacing: 0.06em; flex-wrap: wrap; gap: 12px; }
     footer a { color: var(--muted); text-decoration: none; }
     footer a:hover { color: var(--accent); }
 
@@ -342,8 +93,8 @@
       nav ul { display: none; }
       .hero-content { padding: 0 24px 60px; }
       section { padding: 60px 24px; }
-      .dest-card:first-child { grid-column: span 1; aspect-ratio: 3/4; }
-      footer { padding: 32px 24px; flex-direction: column; gap: 12px; text-align: center; }
+      .dest-card.wide { grid-column: span 1; aspect-ratio: 3/4; }
+      footer { padding: 32px 24px; }
       .scroll-hint { right: 24px; }
     }
   </style>
@@ -352,7 +103,6 @@
 
 <div id="tooltip"></div>
 
-<!-- NAV -->
 <nav>
   <a href="#" class="logo">raf<span>seven4</span></a>
   <ul>
@@ -362,95 +112,39 @@
   </ul>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
   <div class="hero-bg"></div>
   <div class="hero-content">
     <p class="hero-eyebrow">A life in motion</p>
     <h1 class="hero-title">Places<br>I've <em>been</em><br>to</h1>
-    <p class="hero-desc">A personal record of every country I've set foot in. From the beaches of Brazil to the streets of Paris — the world is a book and I'm still reading.</p>
+    <p class="hero-desc">A personal record of every country I've set foot in — spanning 6 continents, from the jungles of Central Africa to the temples of Japan.</p>
     <div class="hero-stats">
-      <div>
-        <div class="hero-stat-n" id="hero-cnt">5</div>
-        <div class="hero-stat-l">Countries</div>
-      </div>
-      <div>
-        <div class="hero-stat-n">3</div>
-        <div class="hero-stat-l">Continents</div>
-      </div>
-      <div>
-        <div class="hero-stat-n">3%</div>
-        <div class="hero-stat-l">Of the world</div>
-      </div>
+      <div><div class="hero-stat-n">51</div><div class="hero-stat-l">Countries</div></div>
+      <div><div class="hero-stat-n">6</div><div class="hero-stat-l">Continents</div></div>
+      <div><div class="hero-stat-n">26%</div><div class="hero-stat-l">Of the world</div></div>
     </div>
   </div>
-  <div class="scroll-hint">
-    <div class="scroll-line"></div>
-    scroll
-  </div>
+  <div class="scroll-hint"><div class="scroll-line"></div>scroll</div>
 </div>
 
-<!-- DESTINATIONS -->
 <section id="destinations">
   <div class="section-header">
     <div>
       <div class="section-label">Destinations</div>
       <h2 class="section-title">Every place,<br>a memory</h2>
     </div>
-    <span class="section-count">5 visited</span>
+    <span class="section-count" id="visible-count">51 visited</span>
   </div>
-
-  <div class="dest-grid">
-
-    <div class="dest-card">
-      <img class="dest-img" src="https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=1200&q=80" alt="Brazil"/>
-      <div class="dest-overlay">
-        <div class="dest-tag">Home</div>
-        <div class="dest-name">Brazil</div>
-        <div class="dest-sub">South America</div>
-      </div>
-    </div>
-
-    <div class="dest-card">
-      <img class="dest-img" src="https://images.unsplash.com/photo-1589909202802-8f4aadce1849?w=800&q=80" alt="Argentina"/>
-      <div class="dest-overlay">
-        <div class="dest-tag">South America</div>
-        <div class="dest-name">Argentina</div>
-        <div class="dest-sub">Buenos Aires</div>
-      </div>
-    </div>
-
-    <div class="dest-card">
-      <img class="dest-img" src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&q=80" alt="USA"/>
-      <div class="dest-overlay">
-        <div class="dest-tag">North America</div>
-        <div class="dest-name">United States</div>
-        <div class="dest-sub">The Americas</div>
-      </div>
-    </div>
-
-    <div class="dest-card">
-      <img class="dest-img" src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80" alt="France"/>
-      <div class="dest-overlay">
-        <div class="dest-tag">Europe</div>
-        <div class="dest-name">France</div>
-        <div class="dest-sub">Paris</div>
-      </div>
-    </div>
-
-    <div class="dest-card">
-      <img class="dest-img" src="https://images.unsplash.com/photo-1588001400947-6385aef4ab0e?w=800&q=80" alt="Portugal"/>
-      <div class="dest-overlay">
-        <div class="dest-tag">Europe</div>
-        <div class="dest-name">Portugal</div>
-        <div class="dest-sub">Lisbon</div>
-      </div>
-    </div>
-
+  <div class="filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="Africa">Africa</button>
+    <button class="filter-btn" data-filter="Americas">Americas</button>
+    <button class="filter-btn" data-filter="Asia">Asia</button>
+    <button class="filter-btn" data-filter="Europe">Europe</button>
   </div>
+  <div class="dest-grid" id="dest-grid"></div>
 </section>
 
-<!-- MAP -->
 <section id="map-section">
   <div class="section-header">
     <div>
@@ -458,16 +152,13 @@
       <h2 class="section-title">Where I've<br>landed</h2>
     </div>
   </div>
-
   <div id="map"></div>
-
   <div class="pills-wrap">
     <div class="pills-label">All visited countries</div>
     <div class="pills" id="pills"></div>
   </div>
 </section>
 
-<!-- ABOUT -->
 <section id="about">
   <div class="section-header">
     <div>
@@ -475,62 +166,154 @@
       <h2 class="section-title">The traveller</h2>
     </div>
   </div>
-  <p style="max-width:560px; color:var(--muted); line-height:1.9; font-size:15px;">
-    This is my personal travel log — a visual record of every country I've visited. Each place has shaped how I see the world. This site is a living document; as I travel more, it grows with me.
+  <p style="max-width:560px;color:var(--muted);line-height:1.9;font-size:15px;">
+    This is my personal travel log — a visual record of every country I've visited across 6 continents. Each place has shaped how I see the world. This site grows as I do.
   </p>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <span>rafseven4 &copy; 2026</span>
   <a href="https://github.com/rafseven4">github.com/rafseven4</a>
 </footer>
 
-<!-- MAP SCRIPTS -->
 <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
 <script>
-  const visited = {
-    "Brazil":                   "Home",
-    "Argentina":                "Buenos Aires",
-    "United States of America": "USA",
-    "France":                   "Paris",
-    "Portugal":                 "Lisbon",
-  };
+const destinations = [
+  { name:"Brazil",                            continent:"Americas", note:"Home",               wide:true,  img:"https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=1200&q=80" },
+  { name:"Japan",                             continent:"Asia",     note:"Tokyo & Kyoto",      wide:true,  img:"https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=1200&q=80" },
+  { name:"United States of America",          continent:"Americas", note:"USA",                            img:"https://images.unsplash.com/photo-1534430480872-3498386e7856?w=800&q=80" },
+  { name:"United Kingdom",                    continent:"Europe",   note:"London",                         img:"https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&q=80" },
+  { name:"France",                            continent:"Europe",   note:"Paris",                          img:"https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80" },
+  { name:"United Arab Emirates",              continent:"Asia",     note:"Dubai",                          img:"https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80" },
+  { name:"South Africa",                      continent:"Africa",   note:"Cape Town",          wide:true,  img:"https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=1200&q=80" },
+  { name:"Germany",                           continent:"Europe",   note:"Berlin",                         img:"https://images.unsplash.com/photo-1560969184-10fe8719e047?w=800&q=80" },
+  { name:"Italy",                             continent:"Europe",   note:"Rome & Venice",                  img:"https://images.unsplash.com/photo-1529260830199-42c24126f198?w=800&q=80" },
+  { name:"Spain",                             continent:"Europe",   note:"Barcelona",                      img:"https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=800&q=80" },
+  { name:"Portugal",                          continent:"Europe",   note:"Lisbon",                         img:"https://images.unsplash.com/photo-1588001400947-6385aef4ab0e?w=800&q=80" },
+  { name:"Netherlands",                       continent:"Europe",   note:"Amsterdam",                      img:"https://images.unsplash.com/photo-1584003564911-1d4f754fce9c?w=800&q=80" },
+  { name:"Egypt",                             continent:"Africa",   note:"Cairo & Luxor",      wide:true,  img:"https://images.unsplash.com/photo-1539768942893-daf53e448371?w=1200&q=80" },
+  { name:"Thailand",                          continent:"Asia",     note:"Bangkok",                        img:"https://images.unsplash.com/photo-1519451241324-20b4ea2c4220?w=800&q=80" },
+  { name:"Singapore",                         continent:"Asia",     note:"City-state",                     img:"https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800&q=80" },
+  { name:"Turkey",                            continent:"Asia",     note:"Istanbul",                       img:"https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=800&q=80" },
+  { name:"Greece",                            continent:"Europe",   note:"Santorini",                      img:"https://images.unsplash.com/photo-1555993539-1732b0258235?w=800&q=80" },
+  { name:"Canada",                            continent:"Americas", note:"Toronto",                        img:"https://images.unsplash.com/photo-1517935706615-2717063c2225?w=800&q=80" },
+  { name:"Mexico",                            continent:"Americas", note:"Mexico City",                    img:"https://images.unsplash.com/photo-1518105779142-d975f22f1b0a?w=800&q=80" },
+  { name:"Argentina",                         continent:"Americas", note:"Buenos Aires",                   img:"https://images.unsplash.com/photo-1589909202802-8f4aadce1849?w=800&q=80" },
+  { name:"Nigeria",                           continent:"Africa",   note:"Lagos",                          img:"https://images.unsplash.com/photo-1618767689160-da3fb810aad7?w=800&q=80" },
+  { name:"Angola",                            continent:"Africa",   note:"Luanda",                         img:"https://images.unsplash.com/photo-1609198092458-38a293c7ac4b?w=800&q=80" },
+  { name:"Norway",                            continent:"Europe",   note:"Fjords",             wide:true,  img:"https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=1200&q=80" },
+  { name:"Sweden",                            continent:"Europe",   note:"Stockholm",                      img:"https://images.unsplash.com/photo-1508189860359-777d945909ef?w=800&q=80" },
+  { name:"Switzerland",                       continent:"Europe",   note:"Alps",                           img:"https://images.unsplash.com/photo-1509644851169-2acc08aa25b5?w=800&q=80" },
+  { name:"Austria",                           continent:"Europe",   note:"Vienna",                         img:"https://images.unsplash.com/photo-1516550135131-fe3dcb0bedc8?w=800&q=80" },
+  { name:"Belgium",                           continent:"Europe",   note:"Brussels",                       img:"https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=800&q=80" },
+  { name:"Ireland",                           continent:"Europe",   note:"Dublin",                         img:"https://images.unsplash.com/photo-1590089415225-401ed6f9db8e?w=800&q=80" },
+  { name:"Denmark",                           continent:"Europe",   note:"Copenhagen",                     img:"https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?w=800&q=80" },
+  { name:"Hungary",                           continent:"Europe",   note:"Budapest",                       img:"https://images.unsplash.com/photo-1551867633-194f125bddfa?w=800&q=80" },
+  { name:"Poland",                            continent:"Europe",   note:"Warsaw",                         img:"https://images.unsplash.com/photo-1519197924294-4ba991a11128?w=800&q=80" },
+  { name:"Czechia (Czech Republic)",          continent:"Europe",   note:"Prague",                         img:"https://images.unsplash.com/photo-1592906209472-a36b1f3782ef?w=800&q=80" },
+  { name:"Croatia",                           continent:"Europe",   note:"Dubrovnik",                      img:"https://images.unsplash.com/photo-1555990793-da11153b2473?w=800&q=80" },
+  { name:"Slovakia",                          continent:"Europe",   note:"Bratislava",                     img:"https://images.unsplash.com/photo-1589825743636-e9380de8fcef?w=800&q=80" },
+  { name:"Slovenia",                          continent:"Europe",   note:"Ljubljana",                      img:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80" },
+  { name:"Malta",                             continent:"Europe",   note:"Valletta",                       img:"https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=800&q=80" },
+  { name:"South Korea",                       continent:"Asia",     note:"Seoul",              wide:true,  img:"https://images.unsplash.com/photo-1538669715315-155098f0fb1d?w=1200&q=80" },
+  { name:"Malaysia",                          continent:"Asia",     note:"Kuala Lumpur",                   img:"https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=800&q=80" },
+  { name:"Philippines",                       continent:"Asia",     note:"Palawan",                        img:"https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=800&q=80" },
+  { name:"Bahrain",                           continent:"Asia",     note:"Manama",                         img:"https://images.unsplash.com/photo-1590059390047-55d0a77e44b5?w=800&q=80" },
+  { name:"Dominican Republic",                continent:"Americas", note:"Punta Cana",                     img:"https://images.unsplash.com/photo-1580237541049-2d715a09486e?w=800&q=80" },
+  { name:"Bahamas",                           continent:"Americas", note:"Nassau",             wide:true,  img:"https://images.unsplash.com/photo-1548574505-5e239809ee19?w=1200&q=80" },
+  { name:"Trinidad and Tobago",               continent:"Americas", note:"Port of Spain",                  img:"https://images.unsplash.com/photo-1595434091143-b375ced5fe5c?w=800&q=80" },
+  { name:"Dominica",                          continent:"Americas", note:"Nature isle",                    img:"https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?w=800&q=80" },
+  { name:"Guatemala",                         continent:"Americas", note:"Antigua",                        img:"https://images.unsplash.com/photo-1558618047-f4e90640de24?w=800&q=80" },
+  { name:"Honduras",                          continent:"Americas", note:"Tegucigalpa",                    img:"https://images.unsplash.com/photo-1565967511849-76a60a516170?w=800&q=80" },
+  { name:"Ghana",                             continent:"Africa",   note:"Accra",                          img:"https://images.unsplash.com/photo-1611348586804-61bf6c080437?w=800&q=80" },
+  { name:"Cameroon",                          continent:"Africa",   note:"Yaoundé",                        img:"https://images.unsplash.com/photo-1619546813926-a78fa6372cd2?w=800&q=80" },
+  { name:"Ivory Coast",                       continent:"Africa",   note:"Abidjan",                        img:"https://images.unsplash.com/photo-1580902394774-f15439b37571?w=800&q=80" },
+  { name:"Democratic Republic of the Congo",  continent:"Africa",   note:"Kinshasa",                       img:"https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800&q=80" },
+  { name:"Bahamas",                           continent:"Americas", note:"Nassau",                         img:"https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800&q=80" },
+];
 
-  const tip   = document.getElementById('tooltip');
-  const pills = document.getElementById('pills');
+const mapLookup = {
+  "Czechia (Czech Republic)":          "Czechia",
+  "Ivory Coast":                       "Côte d'Ivoire",
+  "Democratic Republic of the Congo":  "Dem. Rep. Congo",
+};
 
-  Object.entries(visited).forEach(([name, note]) => {
-    const p = document.createElement('span');
-    p.className = 'pill';
-    p.textContent = note && note !== name ? name + ' — ' + note : name;
-    pills.appendChild(p);
+const grid     = document.getElementById('dest-grid');
+const pillsEl  = document.getElementById('pills');
+const tip      = document.getElementById('tooltip');
+const countEl  = document.getElementById('visible-count');
+
+const unique = [];
+const seen = new Set();
+destinations.forEach(d => { if (!seen.has(d.name)) { seen.add(d.name); unique.push(d); } });
+
+function buildGrid(filter) {
+  grid.innerHTML = '';
+  let count = 0, wideUsed = 0;
+  unique.forEach(d => {
+    if (filter !== 'all' && d.continent !== filter) return;
+    count++;
+    const card = document.createElement('div');
+    const isWide = d.wide && wideUsed < 4;
+    card.className = 'dest-card' + (isWide ? ' wide' : '');
+    if (isWide) wideUsed++;
+    card.innerHTML = `<img class="dest-img" src="${d.img}" alt="${d.name}" loading="lazy"/>
+      <div class="dest-overlay">
+        <div class="dest-tag">${d.continent}</div>
+        <div class="dest-name">${d.name}</div>
+        <div class="dest-sub">${d.note}</div>
+      </div>`;
+    grid.appendChild(card);
   });
+  countEl.textContent = count + ' visited';
+}
 
-  const svg  = d3.select('#map').append('svg').attr('viewBox','0 0 960 500').attr('width','100%');
-  const proj = d3.geoNaturalEarth1().scale(158).translate([480,260]);
-  const path = d3.geoPath(proj);
+buildGrid('all');
 
-  d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(world => {
-    const features = topojson.feature(world, world.objects.countries).features;
-    svg.selectAll('path')
-      .data(features)
-      .join('path')
-      .attr('d', path)
-      .attr('class', d => visited[d.properties?.name] ? 'country-visited' : 'country-default')
-      .attr('stroke', '#0a0a0b')
-      .attr('stroke-width', 0.5)
-      .on('mousemove', function(event, d) {
-        const name = d.properties?.name || '';
-        if (!visited[name]) return;
-        tip.style.left = (event.clientX + 14) + 'px';
-        tip.style.top  = (event.clientY - 32) + 'px';
-        tip.style.opacity = '1';
-        tip.textContent = visited[name] ? name + ' — ' + visited[name] : name;
-      })
-      .on('mouseleave', () => { tip.style.opacity = '0'; });
+unique.sort((a,b) => a.name.localeCompare(b.name)).forEach(d => {
+  const p = document.createElement('span');
+  p.className = 'pill';
+  p.textContent = d.name;
+  pillsEl.appendChild(p);
+});
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    buildGrid(btn.dataset.filter);
   });
+});
+
+const visitedMap = {};
+unique.forEach(d => {
+  const key = mapLookup[d.name] || d.name;
+  visitedMap[key] = d.note;
+});
+
+const svg  = d3.select('#map').append('svg').attr('viewBox','0 0 960 500').attr('width','100%');
+const proj = d3.geoNaturalEarth1().scale(158).translate([480,260]);
+const path = d3.geoPath(proj);
+
+d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(world => {
+  const features = topojson.feature(world, world.objects.countries).features;
+  svg.selectAll('path')
+    .data(features)
+    .join('path')
+    .attr('d', path)
+    .attr('class', d => visitedMap[d.properties?.name] ? 'country-visited' : 'country-default')
+    .attr('stroke','#0a0a0b').attr('stroke-width', 0.5)
+    .on('mousemove', function(event, d) {
+      const name = d.properties?.name || '';
+      if (!visitedMap[name]) return;
+      tip.style.left = (event.clientX + 14) + 'px';
+      tip.style.top  = (event.clientY - 32) + 'px';
+      tip.style.opacity = '1';
+      tip.textContent = name + ' — ' + visitedMap[name];
+    })
+    .on('mouseleave', () => { tip.style.opacity = '0'; });
+});
 </script>
 </body>
 </html>
