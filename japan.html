@@ -239,11 +239,13 @@
       filter: brightness(0.8);
     }
     .panorama-caption {
-      position: absolute; top: 32px; left: 80px;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 300; font-style: italic;
-    }
-    .panorama-caption span { color: var(--accent); }
+  position: absolute; top: 32px; left: 80px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 600; font-style: italic;
+  color: #fff;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.9), 0 1px 4px rgba(0,0,0,0.8);
+}
+.panorama-caption span { color: var(--accent); text-shadow: 0 2px 12px rgba(0,0,0,0.9), 0 1px 4px rgba(0,0,0,0.8); }
 
     /* ── MOMENTS GRID ── */
     .moments-header {
