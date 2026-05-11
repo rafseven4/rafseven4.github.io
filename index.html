@@ -257,59 +257,9 @@
 </div>
 
 <script src="https://d3js.org/d3.v7.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/topojson@3"></script>
+<script src="https://unpkg.com/topojson-client@3"></script>
 
 <script>
-// ═════════════════════════════════════════════════════════════════════
-// LANGUAGE SYSTEM
-// ═════════════════════════════════════════════════════════════════════
-
-let currentLang = localStorage.getItem('lang') || 'en';
-
-function setLanguage(lang) {
-  currentLang = lang;
-  localStorage.setItem('lang', lang);
-  
-  document.documentElement.lang = lang === 'pl' ? 'pl' : 'en';
-  
-  // Update all elements with data attributes
-  document.querySelectorAll('[data-en][data-pl]').forEach(el => {
-    const textContent = el.getAttribute(`data-${lang}`);
-    if (textContent) {
-      // For elements with child nodes, only replace direct text
-      if (el.children.length === 0) {
-        el.textContent = textContent;
-      } else {
-        // For elements with children, update the first text node only
-        for (let node of el.childNodes) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            node.textContent = textContent;
-            break;
-          }
-        }
-      }
-    }
-  });
-
-  // Update visible count text
-  const countEl = document.getElementById('visible-count');
-  if (countEl) {
-    const count = countEl.textContent.split(' ')[0];
-    countEl.textContent = count + ' ' + (lang === 'pl' ? 'odwiedzone' : 'visited');
-  }
-
-  // Rebuild grid with translated continent names
-  buildGrid(document.querySelector('.filter-btn.active').dataset.filter);
-}
-
-// Language toggle button
-document.getElementById('lang-btn').addEventListener('click', () => {
-  setLanguage(currentLang === 'en' ? 'pl' : 'en');
-});
-
-// Apply language on load
-setLanguage(currentLang);
-
 // ═════════════════════════════════════════════════════════════════════
 // DESTINATIONS DATA
 // ═════════════════════════════════════════════════════════════════════
@@ -529,6 +479,51 @@ document.getElementById('map').addEventListener('mouseover', e => {
     sounds.mapHover();
   }
 });
+
+// ═════════════════════════════════════════════════════════════════════
+// LANGUAGE SYSTEM
+// ═════════════════════════════════════════════════════════════════════
+
+let currentLang = localStorage.getItem('lang') || 'en';
+
+function setLanguage(lang) {
+  currentLang = lang;
+  localStorage.setItem('lang', lang);
+  document.documentElement.lang = lang;
+
+  document.querySelectorAll('[data-en][data-pl]').forEach(el => {
+    const text = el.getAttribute('data-' + lang);
+    if (!text) return;
+    if (el.children.length === 0) {
+      el.textContent = text;
+    } else {
+      for (let node of el.childNodes) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          node.textContent = text;
+          break;
+        }
+      }
+    }
+  });
+
+  // Odśwież licznik
+  const count = document.getElementById('visible-count');
+  if (count) {
+    const n = count.textContent.split(' ')[0];
+    count.textContent = n + ' ' + (lang === 'pl' ? 'odwiedzone' : 'visited');
+  }
+
+  // Odśwież siatkę kart
+  const activeFilter = document.querySelector('.filter-btn.active');
+  if (activeFilter) buildGrid(activeFilter.dataset.filter);
+}
+
+document.getElementById('lang-btn').addEventListener('click', () => {
+  setLanguage(currentLang === 'en' ? 'pl' : 'en');
+});
+
+// Uruchom przy starcie
+setLanguage(currentLang);
 </script>
 </body>
 </html>
