@@ -277,6 +277,21 @@
     .moment-tag { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
     .moment-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 300; }
 
+    /* ── VIDEO ── */
+    .video-wrap {
+      padding: 80px 80px 0;
+    }
+    .video-wrap video {
+      width: 100%;
+      display: block;
+      max-height: 80vh;
+      object-fit: cover;
+      background: #000;
+    }
+    @media (max-width: 768px) {
+      .video-wrap { padding: 40px 24px 0; }
+    }
+
     /* ── CLOSING ── */
     .closing {
       padding: 120px 80px;
@@ -668,6 +683,18 @@
     <img src="https://images.pexels.com/photos/31037835/pexels-photo-31037835.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Fuji convenience store"/>
     <div class="moment-overlay"><div class="moment-tag">Fujiyoshida</div><div class="moment-title" data-en="The iconic Fuji shot" data-pl="Kultowe zdjęcie Fuji">The iconic Fuji shot</div></div>
   </div>
+</div>
+
+<!-- VIDEO -->
+<div class="video-wrap">
+  <video
+    src="https://raw.githubusercontent.com/rafseven4/PlacesX/main/video/IMG_4937.MOV"
+    autoplay
+    muted
+    loop
+    playsinline
+    controls
+  ></video>
 </div>
 
 <!-- CLOSING -->
