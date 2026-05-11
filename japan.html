@@ -28,13 +28,6 @@
       padding: 24px 48px;
       background: linear-gradient(to bottom, rgba(10,10,11,0.95), transparent);
     }
-    
-    .nav-left {
-      display: flex;
-      align-items: center;
-      gap: 32px;
-    }
-
     .back-btn {
       display: flex; align-items: center; gap: 10px;
       color: var(--muted); text-decoration: none; font-size: 12px;
@@ -44,7 +37,6 @@
     .back-btn:hover { color: var(--accent); }
     .back-arrow { font-size: 16px; transition: transform 0.2s; }
     .back-btn:hover .back-arrow { transform: translateX(-4px); }
-    
     .nav-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.1rem; font-weight: 300; font-style: italic;
@@ -198,326 +190,329 @@
     }
     .story-text.dark-gold { background: #1a1208; }
     .story-location {
-      font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 20px;
+      font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 16px;
     }
     .story-heading {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 300; line-height: 1.15;
-      margin-bottom: 20px;
+      font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 300;
+      line-height: 1.2; margin-bottom: 20px;
     }
     .story-heading em { font-style: italic; color: var(--accent); }
     .story-body {
-      font-size: 14px; color: var(--muted); line-height: 1.8; max-width: 500px;
+      font-size: 14px; color: var(--muted); line-height: 1.85;
     }
-    .story-body p { margin-bottom: 12px; }
-    .story-body p:last-child { margin-bottom: 0; }
+    .story-body p + p { margin-top: 12px; }
     .story-quote {
-      margin-top: 32px; padding: 24px 0; border-top: 1px solid var(--border);
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.6rem, 2.5vw, 2rem); font-weight: 300; font-style: italic;
-      color: var(--accent);
+      font-size: 1.6rem; font-weight: 300; font-style: italic;
+      color: var(--accent); line-height: 1.3;
+      border-left: 2px solid var(--accent); padding-left: 20px;
+      margin: 20px 0;
     }
+
+    /* ── STATS STRIP ── */
+    .stats-strip {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin: 0 80px;
+    }
+    .stat-cell {
+      padding: 40px 32px;
+      border-right: 1px solid var(--border);
+    }
+    .stat-cell:last-child { border-right: none; }
+    .stat-n {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem; font-weight: 300; color: var(--accent); line-height: 1;
+    }
+    .stat-l { font-size: 11px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 6px; }
 
     /* ── PANORAMA ── */
     .panorama {
-      position: relative; height: 50vh; overflow: hidden;
-      display: flex; align-items: center; justify-content: center;
+      margin: 80px 0;
+      position: relative; overflow: hidden;
     }
     .panorama img {
-      width: 100%; height: 100%; object-fit: cover;
-      animation: panpan 30s ease-in-out infinite;
+      width: 100%; height: 520px; object-fit: cover; display: block;
+      filter: brightness(0.8);
     }
-    @keyframes panpan { 0%,100%{transform:scale(1)} 50%{transform:scale(1.02)} }
     .panorama-caption {
       position: absolute; bottom: 32px; left: 80px;
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.4rem, 2vw, 2rem); font-weight: 300; font-style: italic;
-      color: var(--text); text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+      font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 300; font-style: italic;
     }
     .panorama-caption span { color: var(--accent); }
 
     /* ── MOMENTS GRID ── */
     .moments-header {
-      padding: 100px 80px 40px;
-      border-bottom: 1px solid var(--border);
-    }
-    .moments-header h2 {
-      margin-bottom: 0;
+      padding: 0 80px 40px;
     }
     .moments-grid {
-      padding: 0; display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
       gap: 2px;
+      padding: 0 80px;
     }
     .moment-card {
-      position: relative; aspect-ratio: 4/3; overflow: hidden; cursor: pointer;
-      background: var(--surface);
+      position: relative; overflow: hidden;
+      aspect-ratio: 1; background: var(--surface);
+      cursor: default;
     }
     .moment-card img {
       width: 100%; height: 100%; object-fit: cover;
-      transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
-      filter: brightness(0.75);
+      transition: transform 0.6s ease, filter 0.6s ease;
+      filter: brightness(0.75) saturate(0.9);
     }
-    .moment-card:hover img { transform: scale(1.05); filter: brightness(0.95); }
+    .moment-card:hover img { transform: scale(1.06); filter: brightness(0.9) saturate(1.1); }
     .moment-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(10,10,11,0.9) 0%, transparent 60%);
-      display: flex; flex-direction: column; justify-content: flex-end; padding: 24px;
+      background: linear-gradient(to top, rgba(10,10,11,0.9) 0%, transparent 50%);
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 20px;
+      opacity: 0; transition: opacity 0.3s;
     }
-    .moment-tag { font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
-    .moment-title {
-      font-family: 'Cormorant Garamond', serif; font-size: 1.4rem;
-      font-weight: 300; line-height: 1.1;
-    }
+    .moment-card:hover .moment-overlay { opacity: 1; }
+    .moment-tag { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+    .moment-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 300; }
 
     /* ── CLOSING ── */
     .closing {
-      padding: 100px 80px;
+      padding: 120px 80px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
       border-top: 1px solid var(--border);
-      display: grid; gap: 40px;
     }
     .closing-quote {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; line-height: 1.3;
-      max-width: 680px;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 300; line-height: 1.1; font-style: italic;
     }
-    .closing-quote span { color: var(--accent); font-style: italic; }
-    .closing-text {
-      max-width: 600px;
-    }
-    .closing-text p {
-      font-size: 14px; color: var(--muted); line-height: 1.8; margin-bottom: 16px;
-    }
-    .closing-text p:last-child { margin-bottom: 0; }
+    .closing-quote span { color: var(--accent); display: block; }
+    .closing-text { color: var(--muted); font-size: 14px; line-height: 1.9; }
+    .closing-text p + p { margin-top: 16px; }
     .closing-sig {
-      font-size: 12px; color: var(--muted); letter-spacing: 0.1em;
-      margin-top: 20px;
+      margin-top: 32px; font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem; font-style: italic; color: var(--accent);
+    }
+
+    /* ── MUSIC PLAYER ── */
+    #music-player {
+      position: fixed;
+      bottom: 32px;
+      left: 32px;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(12,12,14,0.92);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+      border-radius: 50px;
+      padding: 10px 20px 10px 10px;
+      transition: all 0.3s ease;
+    }
+    #music-player:hover { border-color: rgba(201,169,110,0.3); }
+
+    .player-btn {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--accent); border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: transform 0.2s, background 0.2s;
+    }
+    .player-btn:hover { transform: scale(1.1); }
+    .player-btn svg { width: 14px; height: 14px; fill: #1a1208; }
+
+    .player-info { min-width: 0; }
+    .player-title {
+      font-size: 11px; font-weight: 500; color: var(--text);
+      letter-spacing: 0.06em; white-space: nowrap;
+      overflow: hidden; text-overflow: ellipsis; max-width: 160px;
+    }
+    .player-sub {
+      font-size: 10px; color: var(--muted); letter-spacing: 0.08em;
+      margin-top: 2px;
+    }
+
+    .player-bars {
+      display: flex; align-items: flex-end; gap: 2px; height: 16px;
+    }
+    .bar {
+      width: 3px; background: var(--accent); border-radius: 2px;
+      transform-origin: bottom;
+    }
+    .bar:nth-child(1) { animation: bar1 0.8s ease-in-out infinite; }
+    .bar:nth-child(2) { animation: bar2 0.6s ease-in-out infinite; }
+    .bar:nth-child(3) { animation: bar3 0.9s ease-in-out infinite; }
+    .bar:nth-child(4) { animation: bar1 0.7s ease-in-out infinite; }
+    .player-bars.paused .bar { animation-play-state: paused; height: 3px !important; }
+
+    @keyframes bar1 { 0%,100%{height:4px} 50%{height:14px} }
+    @keyframes bar2 { 0%,100%{height:10px} 50%{height:4px} }
+    @keyframes bar3 { 0%,100%{height:7px} 50%{height:14px} }
+
+    .player-vol {
+      display: flex; align-items: center; gap: 6px;
+      border-left: 1px solid var(--border); padding-left: 14px;
+    }
+    .player-vol svg { width: 12px; height: 12px; fill: var(--muted); flex-shrink: 0; }
+    #vol-slider {
+      -webkit-appearance: none; appearance: none;
+      width: 60px; height: 3px;
+      background: var(--border); border-radius: 2px; outline: none; cursor: pointer;
+    }
+    #vol-slider::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 10px; height: 10px;
+      border-radius: 50%; background: var(--accent); cursor: pointer;
     }
 
     /* ── FOOTER ── */
     footer {
-      padding: 40px 80px; border-top: 1px solid var(--border);
+      border-top: 1px solid var(--border);
+      padding: 32px 80px;
       display: flex; align-items: center; justify-content: space-between;
-      color: var(--muted); font-size: 12px; letter-spacing: 0.05em; flex-wrap: wrap; gap: 12px;
+      color: var(--muted); font-size: 12px;
     }
-    footer a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    footer a { color: var(--muted); text-decoration: none; }
     footer a:hover { color: var(--accent); }
+    .lang-toggle { display: flex; align-items: center; gap: 0; border: 1px solid var(--border); border-radius: 100px; overflow: hidden; }
+    .lang-btn { background: transparent; border: none; color: var(--muted); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; font-family: 'Syne', sans-serif; padding: 5px 12px; transition: all 0.2s; }
+    .lang-btn.active { background: var(--accent); color: #1a1208; }
+    .lang-btn:hover:not(.active) { color: var(--text); }
 
-    /* ── MUSIC PLAYER ── */
-    #music-player {
-      position: fixed; bottom: 32px; right: 32px; z-index: 99;
-      background: rgba(20,20,24,0.9); backdrop-filter: blur(10px);
-      border: 1px solid var(--border); border-radius: 12px;
-      padding: 16px 20px; display: flex; align-items: center; gap: 16px;
-      max-width: 320px;
-    }
-    .player-btn {
-      width: 40px; height: 40px; border-radius: 50%;
-      background: rgba(255,255,255,0.05); border: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center; cursor: pointer;
-      transition: border-color 0.2s, background 0.2s;
-    }
-    .player-btn:hover { border-color: var(--accent); background: rgba(201,169,110,0.1); }
-    .player-btn svg { width: 18px; height: 18px; fill: var(--muted); transition: fill 0.2s; }
-    .player-btn:hover svg { fill: var(--accent); }
-    .player-info { flex: 1; min-width: 0; }
-    .player-title { font-size: 12px; color: var(--text); margin-bottom: 2px; }
-    .player-sub { font-size: 10px; color: var(--muted); }
-    .player-bars { display: flex; gap: 3px; align-items: flex-end; }
-    .bar { width: 2px; height: 3px; background: var(--accent); border-radius: 1px; animation: barbeat 0.6s ease-in-out infinite; }
-    .bar:nth-child(2) { animation-delay: 0.1s; }
-    .bar:nth-child(3) { animation-delay: 0.2s; }
-    .bar:nth-child(4) { animation-delay: 0.3s; }
-    .player-bars.paused .bar { animation: none; height: 2px; opacity: 0.3; }
-    @keyframes barbeat { 0%,100%{height:3px} 50%{height:12px} }
-    .player-vol { display: flex; align-items: center; gap: 8px; }
-    .player-vol svg { width: 16px; height: 16px; fill: var(--muted); }
-    #vol-slider { width: 40px; height: 3px; }
-
-    /* ── LANGUAGE BUTTON ── */
-    .lang-btn {
-      position: fixed;
-      top: 24px;
-      right: 48px;
-      z-index: 100;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: rgba(20,20,24,0.85);
-      border: 1px solid var(--border);
-      backdrop-filter: blur(10px);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-
-    .lang-btn:hover {
-      border-color: var(--accent);
-      transform: scale(1.1);
-    }
-
-    .lang-btn svg {
-      width: 18px;
-      height: 18px;
-      fill: var(--muted);
-      transition: fill 0.2s;
-    }
-
-    .lang-btn:hover svg {
-      fill: var(--accent);
-    }
-
-    .lang-tooltip {
-      position: absolute;
-      bottom: -40px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 8px 12px;
-      font-size: 11px;
-      color: var(--muted);
-      white-space: nowrap;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s;
-      letter-spacing: 0.05em;
-    }
-
-    .lang-btn:hover .lang-tooltip {
-      opacity: 1;
-    }
-
+    /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       nav { padding: 20px 24px; }
-      .nav-title { display: none; }
-      
-      .intro { grid-template-columns: 1fr; gap: 40px; padding: 60px 24px; }
-      
+      .hero-content { padding: 0 24px 60px; }
+      .intro { padding: 60px 24px; grid-template-columns: 1fr; gap: 40px; }
+      .intro-img-caption { right: 0; bottom: -16px; }
       .chapter { padding: 60px 24px 0; }
-      .chapter-num { font-size: 3rem; }
-      
       .story { padding: 40px 24px 60px; }
-      
-      .story-layout-a { grid-template-columns: 1fr; }
-      .story-layout-b { grid-template-columns: 1fr; }
-      .story-layout-c { grid-template-columns: 1fr; }
-      .story-layout-d { grid-template-columns: 1fr; }
-      
-      .moments-header { padding: 60px 24px 40px; }
-      
-      .closing { padding: 60px 24px; }
-      
-      footer { padding: 32px 24px; }
-      
-      .scroll-cue { right: 24px; }
-      
-      .hero-content { padding: 0 24px 80px; }
-      
+      .story-layout-a, .story-layout-b, .story-layout-c, .story-layout-d { grid-template-columns: 1fr; }
+      .story-img.span2, .story-img.span3 { grid-column: span 1; }
+      .stats-strip { margin: 0 24px; grid-template-columns: repeat(2,1fr); }
+      .moments-grid { grid-template-columns: 1fr 1fr; padding: 0 24px; }
+      .moments-header { padding: 0 24px 32px; }
+      .panorama img { height: 300px; }
       .panorama-caption { left: 24px; }
-      
-      #music-player { max-width: 90vw; right: 24px; bottom: 24px; }
-      
-      .lang-btn { right: 24px; }
+      .closing { padding: 60px 24px; grid-template-columns: 1fr; gap: 40px; }
+      footer { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
+      .scroll-cue { right: 24px; }
     }
   </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
-  <div class="nav-left">
-    <a href="index.html" class="back-btn">
-      <span class="back-arrow">←</span>
-      <span data-en="Back" data-pl="Powrót">Back</span>
-    </a>
-    <div class="nav-title" data-en="April 2024" data-pl="Kwiecień 2024">April 2024</div>
+  <a href="index.html" class="back-btn">
+    <span class="back-arrow">←</span> <span data-en="All destinations" data-pl="Wszystkie destynacje">All destinations</span>
+  </a>
+  <span class="nav-title" data-en="Japan, April 2024" data-pl="Japonia, kwiecień 2024">Japan, April 2024</span>
+  <div class="lang-toggle">
+    <button class="lang-btn active" data-lang="en">EN</button>
+    <button class="lang-btn" data-lang="pl">PL</button>
   </div>
 </nav>
 
-<button class="lang-btn" id="lang-btn" title="Change language">
-  <svg viewBox="0 0 24 24"><path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.9h15.97c-.5 1.38-1.2 2.64-2.16 3.7h-.5c-.96-.53-2.05-.9-3.2-.9-3.22 0-5.8 2.58-5.8 5.8 0 1.69.7 3.2 1.84 4.27l-5.5 5.5h3.8l1.04-1.02c.21.13.48.26.79.26 4.01 0 8-3.2 8-8l-.07-.07-2.17 2.15z"/></svg>
-  <div class="lang-tooltip" data-en="EN / PL" data-pl="EN / PL">EN / PL</div>
-</button>
-
-<!-- HERO SECTION -->
+<!-- HERO -->
 <div class="hero">
   <div class="hero-bg"></div>
   <div class="hero-content">
     <div class="hero-stamp">
       <div class="stamp-line"></div>
-      <div class="stamp-text" data-en="Travel Journal" data-pl="Dziennik Podróży">Travel Journal</div>
+      <span class="stamp-text" data-en="Memory Journal · April 2024" data-pl="Dziennik wspomnień · Kwiecień 2024">Memory Journal · April 2024</span>
     </div>
     <h1 class="hero-title">
       <span class="kanji">日本</span>
-      <span data-en="Japan" data-pl="Japonia">Japan</span>
+      Japan
     </h1>
     <div class="hero-meta">
       <div class="hero-meta-item">
-        <div class="meta-label" data-en="When" data-pl="Kiedy">When</div>
-        <div class="meta-value">April 2024</div>
+        <div class="meta-label" data-en="Duration" data-pl="Czas trwania">Duration</div>
+        <div class="meta-value" data-en="April 2024" data-pl="Kwiecień 2024">April 2024</div>
       </div>
       <div class="meta-divider"></div>
       <div class="hero-meta-item">
-        <div class="meta-label" data-en="Duration" data-pl="Czas">Duration</div>
-        <div class="meta-value"><span data-en="14 days" data-pl="14 dni">14 days</span></div>
+        <div class="meta-label" data-en="Cities" data-pl="Miasta">Cities</div>
+        <div class="meta-value">Osaka · Kyoto · Nara · Tokyo</div>
       </div>
       <div class="meta-divider"></div>
       <div class="hero-meta-item">
-        <div class="meta-label" data-en="Scope" data-pl="Zakres">Scope</div>
-        <div class="meta-value"><span data-en="5 cities" data-pl="5 miast">5 cities</span></div>
+        <div class="meta-label" data-en="Highlight" data-pl="Najważniejsze">Highlight</div>
+        <div class="meta-value">Fuji-san 富士山</div>
       </div>
     </div>
   </div>
   <div class="scroll-cue">
-    <span data-en="scroll to begin" data-pl="przewiń aby zacząć">scroll to begin</span>
     <div class="scroll-cue-line"></div>
+    <span data-en="scroll" data-pl="scrolluj">scroll</span>
   </div>
 </div>
 
-<!-- INTRO SECTION -->
-<div class="intro">
+<!-- INTRO -->
+<section class="intro">
   <div class="intro-text">
-    <div class="section-eyebrow" data-en="First Impressions" data-pl="Pierwsze Wrażenia">First Impressions</div>
-    <h2 class="intro-headline" data-en="A country that rewards curiosity" data-pl="Kraj, który nagradza ciekawość">A country that rewards curiosity</h2>
+    <p class="section-eyebrow" data-en="The journey" data-pl="Podróż">The journey</p>
+    <h2 class="intro-headline" data-en="Cherry blossoms,<br>ancient temples &<br><em>electric cities</em>" data-pl="Kwiaty wiśni,<br>starożytne świątynie &<br><em>elektryczne miasta</em>">Cherry blossoms,<br>ancient temples &<br><em>electric cities</em></h2>
     <div class="intro-body">
-      <p data-en="Touching down in Tokyo after 14 hours in the air, you feel the shift immediately. The station signs are bilingual. The trains are silent and on time. The vending machines work without question. Everything is efficient, polite, and somehow still warm." data-pl="Lądując w Tokio po 14 godzinach w powietrzu, czujesz zmianę natychmiast. Znaki stacji są dwujęzyczne. Pociągi są cicho i punktualne. Automaty działają bez wątpliwości. Wszystko jest efektywne, uprzejme i jakoś ciepłe.">Touching down in Tokyo after 14 hours in the air, you feel the shift immediately. The station signs are bilingual. The trains are silent and on time. The vending machines work without question. Everything is efficient, polite, and somehow still warm.</p>
-      <p data-en="Two weeks later, you understand why Japan sits in the global imagination the way it does. It's not just beautiful. It's thoughtful." data-pl="Dwa tygodnie później rozumiesz, dlaczego Japonia zajmuje miejsce w światowej wyobraźni w ten sposób. To nie jest tylko piękne. To przemyślane.">Two weeks later, you understand why Japan sits in the global imagination the way it does. It's not just beautiful. It's thoughtful.</p>
+      <p data-en="Japan in April is something else entirely. The cherry blossoms — sakura — transform everything: parks, temple grounds, river banks, all wrapped in clouds of soft pink. We timed the trip perfectly." data-pl="Japonia w kwietniu to coś zupełnie wyjątkowego. Kwiaty wiśni — sakura — przemieniają wszystko: parki, tereny świątyń, brzegi rzek, wszystko spowite obłokami delikatnego różu. Idealnie trafiliśmy z terminem.">Japan in April is something else entirely. The cherry blossoms — sakura — transform everything: parks, temple grounds, river banks, all wrapped in clouds of soft pink. We timed the trip perfectly.</p>
+      <p data-en="From the chaotic energy of Osaka's street food alleys to the hushed reverence of Kyoto's bamboo groves, to the gentle deer of Nara, and finally to the overwhelming sensory overload of Tokyo — this trip rewired something in the brain." data-pl="Od chaotycznej energii ulicznych zaułków z jedzeniem w Osace, przez ciche skupienie bambusowych gajów Kioto, po łagodne jelenie z Nary, i wreszcie do przytłaczającego przeciążenia zmysłów w Tokio — ta podróż zmieniła coś w głowie.">From the chaotic energy of Osaka's street food alleys to the hushed reverence of Kyoto's bamboo groves, to the gentle deer of Nara, and finally to the overwhelming sensory overload of Tokyo — this trip rewired something in the brain.</p>
+      <p data-en="And then there was Fuji-san. Standing there, looking up at it, nothing quite prepares you." data-pl="A potem był Fuji-san. Stojąc tam i patrząc w górę, nic cię na to nie przygotowuje.">And then there was Fuji-san. Standing there, looking up at it, nothing quite prepares you.</p>
     </div>
   </div>
   <div class="intro-img-wrap">
-    <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=500" alt="Temple entrance" class="intro-img"/>
-    <div class="intro-img-caption" data-en="Kyoto Temple" data-pl="Świątynia w Kioto">Kyoto Temple</div>
+    <img class="intro-img"
+      img src="img/IMG_9395.jpg" alt="Osaka Castle"
+      alt="Cherry blossoms Osaka"/>
+    <div class="intro-img-caption">Osaka Castle · Sakura Season</div>
   </div>
-</div>
+</section>
 
 <!-- CHAPTER 1: OSAKA -->
 <div class="chapter">
   <div class="chapter-num">01</div>
   <div class="chapter-info">
-    <h2 class="chapter-city"><em data-en="Osaka" data-pl="Osaka">Osaka</em></h2>
-    <p class="chapter-sub" data-en="The kitchen of Japan · Street food · Energy" data-pl="Kuchnia Japonii · Jedzenie uliczne · Energia">The kitchen of Japan · Street food · Energy</p>
+    <h2 class="chapter-city"><em>Osaka</em></h2>
+    <p class="chapter-sub" data-en="The food capital · The electric city · Dotonbori" data-pl="Stolica jedzenia · Elektryczne miasto · Dotonbori">The food capital · The electric city · Dotonbori</p>
   </div>
 </div>
 
 <div class="story story-layout-a">
-  <div class="story-text">
-    <div class="story-location" data-en="Osaka · Dotonbori" data-pl="Osaka · Dotonbori">Osaka · Dotonbori</div>
-    <h3 class="story-heading" data-en="This city feeds you." data-pl="To miasto Cię karmi.">This city <em data-en="feeds" data-pl="karmi">feeds</em> you.</h3>
-    <div class="story-body">
-      <p data-en="Osaka doesn't whisper. It shouts. Neon signs, food stall after food stall, the smell of takoyaki frying and the sound of the crowds — it's sensory overload in the best possible way." data-pl="Osaka się nie szepcze. To krzyczy. Znaki neonowe, kiosk po kisku, zapach smażonych takoyaki i hałas tłumów — to przeciążenie zmysłów w najlepszy możliwy sposób.">Osaka doesn't whisper. It shouts. Neon signs, food stall after food stall, the smell of takoyaki frying and the sound of the crowds — it's sensory overload in the best possible way.</p>
-      <p data-en="We spent an entire evening moving through Dotonbori, trying everything. Okonomiyaki. Yakitori. Ramen that made you forget why you ever ate ramen anywhere else. Osaka is unapologetically about pleasure — food, energy, celebration." data-pl="Spędziliśmy cały wieczór w Dotonbori, próbując wszystkiego. Okonomiyaki. Yakitori. Ramen, które sprawiło, że zapomniałem, dlaczego kiedykolwiek jadłem ramen gdzie indziej. Osaka to niezawstydzenie przyjemność — jedzenie, energia, celebracja.">We spent an entire evening moving through Dotonbori, trying everything. Okonomiyaki. Yakitori. Ramen that made you forget why you ever ate ramen anywhere else. Osaka is unapologetically about pleasure — food, energy, celebration.</p>
-    </div>
-    <div class="story-quote" data-en=""Eat until you're happy, not until you're full."" data-pl=""Jedz aż będziesz szczęśliwy, nie aż będziesz pełny."">"Eat until you're happy, not until you're full."</div>
-  </div>
   <div class="story-img tall">
-    <img src="img/IMG_8945.JPG" alt="Dotonbori street">
+   <img src="img/IMG_9532.JPG" alt="Osaka alley night">
+  </div>
+  <div class="story-text dark-gold">
+    <div class="story-location" data-en="Osaka · Dotonbori" data-pl="Osaka · Dotonbori">Osaka · Dotonbori</div>
+    <h3 class="story-heading" data-en="Eat everything,<br><em>regret nothing</em>" data-pl="Jedz wszystko,<br><em>nie żałuj niczego</em>">Eat everything,<br><em>regret nothing</em></h3>
+    <div class="story-body">
+      <p data-en="Osaka has a saying: <em>kuidaore</em> — &quot;eat until you drop.&quot; We tried our absolute best to honour it. Takoyaki from a street cart, ramen at midnight, wagyu skewers still sizzling, okonomiyaki that took twenty minutes to eat and maybe changed us forever." data-pl="Osaka ma swoje powiedzenie: <em>kuidaore</em> — &quot;jedz, aż padniesz.&quot; Staraliśmy się jak mogliśmy mu sprostać. Takoyaki ze straganu, ramen o północy, skwierczące szaszłyki wagyu, okonomiyaki, które zajęło nam dwadzieścia minut i może nas zmieniło na zawsze.">Osaka has a saying: <em>kuidaore</em> — "eat until you drop." We tried our absolute best to honour it. Takoyaki from a street cart, ramen at midnight, wagyu skewers still sizzling, okonomiyaki that took twenty minutes to eat and maybe changed us forever.</p>
+      <p data-en="Dotonbori at night is chaos and neon and canal reflections. You walk slowly because everything is a photograph. The giant Glico running man. The crab signs. The smell of everything frying at once." data-pl="Dotonbori nocą to chaos, neon i odbicia w kanale. Idziesz powoli, bo wszystko jest fotografią. Gigantyczny biegacz Glico. Znaki z krabami. Zapach wszystkiego smażonego naraz.">Dotonbori at night is chaos and neon and canal reflections. You walk slowly because everything is a photograph. The giant Glico running man. The crab signs. The smell of everything frying at once.</p>
+    </div>
+    <div class="story-quote" data-en="&quot;Osaka doesn't ask if you're hungry. It assumes you are.&quot;" data-pl="„Osaka nie pyta, czy jesteś głodny. Zakłada, że tak.""><span>"Osaka doesn't ask if you're hungry. It assumes you are."</span></div>
   </div>
   <div class="story-img wide span2">
-    <img src="https://images.pexels.com/photos/1634260/pexels-photo-1634260.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Osaka night street"/>
+    <img src="img/IMG_9468.jpg" alt="Dotonbori">
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stat-cell">
+    <div class="stat-n">14</div>
+    <div class="stat-l" data-en="Nights in Japan" data-pl="Nocy w Japonii">Nights in Japan</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-n">4</div>
+    <div class="stat-l" data-en="Cities explored" data-pl="Zwiedzonych miast">Cities explored</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-n">∞</div>
+    <div class="stat-l" data-en="Bowls of ramen" data-pl="Misek ramenu">Bowls of ramen</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-n">3776</div>
+    <div class="stat-l" data-en="Metres — Mt Fuji" data-pl="Metrów — Fuji-san">Metres — Mt Fuji</div>
   </div>
 </div>
 
@@ -525,20 +520,47 @@
 <div class="chapter">
   <div class="chapter-num">02</div>
   <div class="chapter-info">
-    <h2 class="chapter-city"><em data-en="Kyoto" data-pl="Kioto">Kyoto</em></h2>
-    <p class="chapter-sub" data-en="Ancient temples · Cherry blossoms · Silence" data-pl="Starożytne świątynie · Kwiaty wiśni · Cisza">Ancient temples · Cherry blossoms · Silence</p>
+    <h2 class="chapter-city"><em>Kyoto</em></h2>
+    <p class="chapter-sub" data-en="Golden Pavilion · Fushimi Inari · Bamboo Grove" data-pl="Złoty Pawilon · Fushimi Inari · Bambusowy Gaj">Golden Pavilion · Fushimi Inari · Bamboo Grove</p>
+  </div>
+</div>
+
+<div class="story story-layout-c">
+  <div class="story-text">
+    <div class="story-location" data-en="Kyoto · Ancient Capital" data-pl="Kioto · Starożytna Stolica">Kyoto · Ancient Capital</div>
+    <h3 class="story-heading" data-en="Where time<br><em>moves slower</em>" data-pl="Gdzie czas<br><em>płynie wolniej</em>">Where time<br><em>moves slower</em></h3>
+    <div class="story-body">
+      <p data-en="Kyoto is the counterweight to Osaka. Quieter. Heavier with history. Every street feels like it belongs to another century. We walked the Philosopher's Path while petals fell around us — a cliché that turns out to be entirely real and completely overwhelming." data-pl="Kioto to przeciwwaga Osaki. Ciszej. Cięższe od historii. Każda ulica wygląda jakby należała do innego stulecia. Szliśmy Ścieżką Filozofa, gdy płatki opadały wokół nas — to co wydaje się kliszą, okazuje się całkowicie prawdziwe i przytłaczające.">Kyoto is the counterweight to Osaka. Quieter. Heavier with history. Every street feels like it belongs to another century. We walked the Philosopher's Path while petals fell around us — a cliché that turns out to be entirely real and completely overwhelming.</p>
+      <p data-en="Kinkaku-ji — the Golden Pavilion — glows in the morning light like something dreamed up. We arrived early to beat the crowds and had ten full minutes of near-silence with it. That doesn't happen by accident." data-pl="Kinkaku-ji — Złoty Pawilon — świeci w porannym świetle jak coś z snu. Dotarliśmy wcześnie, żeby wyprzedzić tłumy i mieliśmy pełne dziesięć minut prawie w ciszy. To się nie zdarza przez przypadek.">Kinkaku-ji — the Golden Pavilion — glows in the morning light like something dreamed up. We arrived early to beat the crowds and had ten full minutes of near-silence with it. That doesn't happen by accident.</p>
+      <p data-en="The thousand torii gates of Fushimi Inari at dusk, climbing higher and higher until the city disappears below — that one stays with you." data-pl="Tysiąc bram torii Fushimi Inari o zmierzchu, wspinając się coraz wyżej, aż miasto znika pod tobą — tego się nie zapomina.">The thousand torii gates of Fushimi Inari at dusk, climbing higher and higher until the city disappears below — that one stays with you.</p>
+    </div>
+  </div>
+  <div class="story-img tall">
+    <img src="img/IMG_9590.jpg" alt="Kinkaku-ji Kyoto">
   </div>
 </div>
 
 <div class="story story-layout-b">
-  <div class="story-img tall">
-    <img src="img/IMG_9023.JPG" alt="Fushimi Inari">
+  <!-- Pierwsza trójka zdjęć -->
+  <div class="story-img sq">
+     <img src="img/IMG_9622.JPG" alt="Bamboo Forest">
   </div>
   <div class="story-img sq">
-    <img src="img/IMG_4697.JPEG" alt="Street detail">
+     <img src="img/IMG_9638.JPG" alt="Kyoto River">
   </div>
   <div class="story-img sq">
-    <img src="img/IMG_9458.JPG" alt="Sushi">
+     <img src="img/IMG_9682.JPG" alt="Kyoto Old Street">
+  </div> 
+
+  <!-- Druga trójka zdjęć (od razu pod spodem, bez nowego <div class="story...">) -->
+  <div class="story-img sq">
+     <img src="img/IMG_9737.JPG" alt="Pagoda">
+  </div>
+  <div class="story-img sq">
+     <img src="img/IMG_9710.JPG" alt="Dancing Girl">
+  </div>
+  <div class="story-img sq">
+     <img src="img/IMG_9458.JPG" alt="Sushi">
   </div>
 </div>
   
@@ -546,7 +568,7 @@
 <div class="chapter">
   <div class="chapter-num">03</div>
   <div class="chapter-info">
-    <h2 class="chapter-city"><em data-en="Nara" data-pl="Nara">Nara</em></h2>
+    <h2 class="chapter-city"><em>Nara</em></h2>
     <p class="chapter-sub" data-en="Sacred deer · Tōdai-ji · Ancient park" data-pl="Święte jelenie · Tōdai-ji · Starożytny park">Sacred deer · Tōdai-ji · Ancient park</p>
   </div>
 </div>
@@ -560,10 +582,10 @@
   </div>
   <div class="story-text">
     <div class="story-location" data-en="Nara · Sacred Park" data-pl="Nara · Święty Park">Nara · Sacred Park</div>
-    <h3 class="story-heading" data-en="The deer own this place" data-pl="Jelenie posiadają to miejsce"><em data-en="The deer" data-pl="Jelenie">The deer</em><br><em data-en="own this place" data-pl="posiadają to miejsce">own this place</em></h3>
+    <h3 class="story-heading" data-en="The deer<br><em>own this place</em>" data-pl="Jelenie<br><em>rządzą tym miejscem</em>">The deer<br><em>own this place</em></h3>
     <div class="story-body">
-      <p data-en="Nobody warned us just how assertive the deer of Nara are. They bow for shika senbei crackers — actual bowing — and then immediately headbutt you when they want more. Sacred but absolutely not tame." data-pl="Nikt nas nie ostrzegł, jak asertywne są jelenie Nary. Kłaniają się na herbatniki shika senbei — rzeczywisty pokłon — a potem natychmiast uderzają Cię głową, gdy chcą więcej. Święte, ale absolutnie nie oswojone.">Nobody warned us just how assertive the deer of Nara are. They bow for shika senbei crackers — actual bowing — and then immediately headbutt you when they want more. Sacred but absolutely not tame.</p>
-      <p data-en="We wandered through the park for hours. The Great Buddha of Tōdai-ji is genuinely staggering in scale — you understand why people crossed oceans to see it. A day trip from Kyoto that felt like a week." data-pl="Wędrować po parku przez godziny. Wielka Budda z Tōdai-ji jest naprawdę oszałamiająca w skali — rozumiesz, dlaczego ludzie przekraczali oceany, aby ją zobaczyć. Jednodniowa wycieczka z Kioto, która czuła się jak tydzień.">We wandered through the park for hours. The Great Buddha of Tōdai-ji is genuinely staggering in scale — you understand why people crossed oceans to see it. A day trip from Kyoto that felt like a week.</p>
+      <p data-en="Nobody warned us just how assertive the deer of Nara are. They bow for shika senbei crackers — actual bowing — and then immediately headbutt you when they want more. Sacred but absolutely not tame." data-pl="Nikt nas nie ostrzegł, jak bezczelne są jelenie z Nary. Kłaniają się po senbei — naprawdę kłaniają — i natychmiast atakują głową, gdy chcą więcej. Święte, ale absolutnie nieoskromione.">Nobody warned us just how assertive the deer of Nara are. They bow for shika senbei crackers — actual bowing — and then immediately headbutt you when they want more. Sacred but absolutely not tame.</p>
+      <p data-en="We wandered through the park for hours. The Great Buddha of Tōdai-ji is genuinely staggering in scale — you understand why people crossed oceans to see it. A day trip from Kyoto that felt like a week." data-pl="Błąkaliśmy się po parku przez wiele godzin. Wielki Budda Tōdai-ji jest naprawdę oszałamiający rozmiarami — rozumiesz, dlaczego ludzie przepływali oceany, żeby go zobaczyć. Jednodniowa wycieczka z Kioto, która czuła się jak tydzień.">We wandered through the park for hours. The Great Buddha of Tōdai-ji is genuinely staggering in scale — you understand why people crossed oceans to see it. A day trip from Kyoto that felt like a week.</p>
     </div>
   </div>
 </div>
@@ -571,15 +593,15 @@
 <!-- PANORAMA: FUJI -->
 <div class="panorama">
    <img src="img/IMG_9900.JPEG" alt="Fuji-san">
-  <div class="panorama-caption" data-en="富士山 — Fuji-san, 3,776m" data-pl="富士山 — Fuji-san, 3 776 m"><span data-en="Fuji-san," data-pl="Fuji-san,">Fuji-san,</span> <span data-en="3,776m" data-pl="3 776 m">3,776m</span></div>
+  <div class="panorama-caption">富士山 — <span>Fuji-san, 3,776m</span></div>
 </div>
 
 <!-- CHAPTER 4: FUJI + TOKYO -->
 <div class="chapter">
   <div class="chapter-num">04</div>
   <div class="chapter-info">
-    <h2 class="chapter-city"><span data-en="Fuji-san &" data-pl="Fuji-san &">Fuji-san &</span> <em data-en="Tokyo" data-pl="Tokio">Tokyo</em></h2>
-    <p class="chapter-sub" data-en="The sacred mountain · The electric megalopolis" data-pl="Święta góra · Elektryczne megamiasto">The sacred mountain · The electric megalopolis</p>
+    <h2 class="chapter-city">Fuji-san &amp; <em>Tokyo</em></h2>
+    <p class="chapter-sub" data-en="The sacred mountain · The electric megalopolis" data-pl="Święta góra · Elektryczna megapolya">The sacred mountain · The electric megalopolis</p>
   </div>
 </div>
 
@@ -589,23 +611,23 @@
   </div>
   <div class="story-text">
     <div class="story-location" data-en="Yamanashi · Mount Fuji" data-pl="Yamanashi · Góra Fuji">Yamanashi · Mount Fuji</div>
-    <h3 class="story-heading" data-en="The mountain needs no filter" data-pl="Góra nie potrzebuje filtra">The mountain<br><em data-en="needs no filter" data-pl="nie potrzebuje filtra">needs no filter</em></h3>
+    <h3 class="story-heading" data-en="The mountain<br><em>needs no filter</em>" data-pl="Ta góra<br><em>nie potrzebuje filtra</em>">The mountain<br><em>needs no filter</em></h3>
     <div class="story-body">
-      <p data-en="We made the day trip to Lake Kawaguchi for the classic Fuji view — perfect snow cap, clear April sky, cherry blossom still clinging to the trees along the shore. The famous convenience store view. All of it." data-pl="Wybraliśmy się na jednodniową wycieczkę do Jeziora Kawaguchi, aby zobaczyć klasyczną perspektywę Fuji — idealna pokrywa śnieżna, czystego niebo kwietnia, kwiat wiśni wciąż trzymający się drzew wzdłuż brzegu. Słynny widok z wygodnego sklepu. Wszystko.">We made the day trip to Lake Kawaguchi for the classic Fuji view — perfect snow cap, clear April sky, cherry blossom still clinging to the trees along the shore. The famous convenience store view. All of it.</p>
-      <p data-en="Standing there with Fuji filling the horizon, you understand why it has been painted, worshipped, and climbed for thousands of years. It's just bigger than everything else. More present. The Japanese call it Fuji-san — not Mount Fuji — and that -san suffix, used for respected elders, feels exactly right." data-pl="Stojąc tam z Fuji wypełniającą horyzont, rozumiesz, dlaczego była malowana, czczona i wspinana przez tysiące lat. To po prostu większe niż wszystko inne. Bardziej obecne. Japończycy nazywają ją Fuji-san — nie Góra Fuji — i ten sufiks -san, używany dla szanowanych starszych osób, czuje się dokładnie prawo.">Standing there with Fuji filling the horizon, you understand why it has been painted, worshipped, and climbed for thousands of years. It's just bigger than everything else. More present. The Japanese call it Fuji-san — not Mount Fuji — and that -san suffix, used for respected elders, feels exactly right.</p>
+      <p data-en="We made the day trip to Lake Kawaguchi for the classic Fuji view — perfect snow cap, clear April sky, cherry blossom still clinging to the trees along the shore. The famous convenience store view. All of it." data-pl="Wybraliśmy się na jednodniową wycieczkę nad jezioro Kawaguchi po klasyczny widok Fuji — doskonała śnieżna czapka, czyste kwietniowe niebo, kwiaty wiśni wciąż trzymające się drzew przy brzegu. Ten słynny widok ze sklepu convenience. Wszystko.">We made the day trip to Lake Kawaguchi for the classic Fuji view — perfect snow cap, clear April sky, cherry blossom still clinging to the trees along the shore. The famous convenience store view. All of it.</p>
+      <p data-en="Standing there with Fuji filling the horizon, you understand why it has been painted, worshipped, and climbed for thousands of years. It's just bigger than everything else. More present. The Japanese call it Fuji-san — not Mount Fuji — and that -san suffix, used for respected elders, feels exactly right." data-pl="Stojąc tam z Fuji wypełniającym horyzont, rozumiesz, dlaczego był malowany, czczony i wspinany przez tysiące lat. Jest po prostu większy od wszystkiego. Bardziej obecny. Japończycy mówią Fuji-san — nie Góra Fuji — i ten sufiks -san, używany dla szanowanych starszych, brzmi idealnie.">Standing there with Fuji filling the horizon, you understand why it has been painted, worshipped, and climbed for thousands of years. It's just bigger than everything else. More present. The Japanese call it Fuji-san — not Mount Fuji — and that -san suffix, used for respected elders, feels exactly right.</p>
     </div>
-    <div class="story-quote" data-en=""Some things earn their legend."" data-pl=""Niektóre rzeczy zasługują na swoją legendę.""">"Some things earn their legend."</div>
+    <div class="story-quote" data-en="&quot;Some things earn their legend.&quot;" data-pl="„Niektóre rzeczy zasługują na swoją legendę.""><span>"Some things earn their legend."</span></div>
   </div>
 </div>
 
 <div class="story story-layout-a">
   <div class="story-text">
     <div class="story-location" data-en="Tokyo · Final Chapter" data-pl="Tokio · Ostatni Rozdział">Tokyo · Final Chapter</div>
-    <h3 class="story-heading" data-en="Tokyo hits like a wave" data-pl="Tokio uderza jak fala">Tokyo hits<br><em data-en="like a wave" data-pl="jak fala">like a wave</em></h3>
+    <h3 class="story-heading" data-en="Tokyo hits<br><em>like a wave</em>" data-pl="Tokio uderza<br><em>jak fala</em>">Tokyo hits<br><em>like a wave</em></h3>
     <div class="story-body">
-      <p data-en="After the quietude of Kyoto and Nara, Tokyo is a deliberate shock to the system. Shinjuku at midnight. Shibuya crossing with its organized human chaos. Akihabara's sensory overload. Yanaka's old-world calm just a subway stop away." data-pl="Po ciszy Kioto i Nary, Tokio to celowy wstrząs dla systemu. Shinjuku o północy. Przejście Shibuya z jego zorganizowanym chaosem ludzi. Przeciążenie zmysłów Akihabary. Stara cisza świata Yanaki zaledwie jeden przystanek metra.">After the quietude of Kyoto and Nara, Tokyo is a deliberate shock to the system. Shinjuku at midnight. Shibuya crossing with its organized human chaos. Akihabara's sensory overload. Yanaka's old-world calm just a subway stop away.</p>
-      <p data-en="Tokyo is a city that somehow functions at a scale that shouldn't work — 14 million people, all of them seemingly on time, all of them impossibly polite. We ate conveyor-belt sushi, visited the teamLab digital art museum, and got genuinely lost in Shimokitazawa's vintage shops." data-pl="Tokio to miasto, które jakoś funkcjonuje w skali, która nie powinna działać — 14 milionów ludzi, wszyscy zdają się być na czas, wszyscy niemożliwie uprzejmi. Jedliśmy sushi z taśmy, odwiedzeliśmy muzeum cyfrowej sztuki teamLab i naprawdę zagubiliśmy się w zabytkowych sklepach Shimokitazawy.">Tokyo is a city that somehow functions at a scale that shouldn't work — 14 million people, all of them seemingly on time, all of them impossibly polite. We ate conveyor-belt sushi, visited the teamLab digital art museum, and got genuinely lost in Shimokitazawa's vintage shops.</p>
-      <p data-en="If Osaka fed us and Kyoto quieted us and Nara charmed us, Tokyo finished us off — in the best possible way." data-pl="Jeśli Osaka nas karmiła, Kioto nas uciszyła i Nara nas oczarowała, Tokio nas skończyła — w najlepszy możliwy sposób.">If Osaka fed us and Kyoto quieted us and Nara charmed us, Tokyo finished us off — in the best possible way.</p>
+      <p data-en="After the quietude of Kyoto and Nara, Tokyo is a deliberate shock to the system. Shinjuku at midnight. Shibuya crossing with its organized human chaos. Akihabara's sensory overload. Yanaka's old-world calm just a subway stop away." data-pl="Po ciszy Kioto i Nary, Tokio to celowy szok dla systemu. Shinjuku o północy. Skrzyżowanie Shibuya z jego zorganizowanym ludzkim chaosem. Przeciążenie zmysłów w Akihabarze. Starodawny spokój Yanaki tylko o stację metra dalej.">After the quietude of Kyoto and Nara, Tokyo is a deliberate shock to the system. Shinjuku at midnight. Shibuya crossing with its organized human chaos. Akihabara's sensory overload. Yanaka's old-world calm just a subway stop away.</p>
+      <p data-en="Tokyo is a city that somehow functions at a scale that shouldn't work — 14 million people, all of them seemingly on time, all of them impossibly polite. We ate conveyor-belt sushi, visited the teamLab digital art museum, and got genuinely lost in Shimokitazawa's vintage shops." data-pl="Tokio to miasto, które jakoś funkcjonuje w skali, która nie powinna działać — 14 milionów ludzi, wszyscy pozornie na czas, wszyscy nieprawdopodobnie uprzejmi. Jedliśmy sushi z taśmociągu, odwiedziliśmy cyfrowe muzeum sztuki teamLab i naprawdę zgubiliśmy się w sklepach vintage w Shimokitazawie.">Tokyo is a city that somehow functions at a scale that shouldn't work — 14 million people, all of them seemingly on time, all of them impossibly polite. We ate conveyor-belt sushi, visited the teamLab digital art museum, and got genuinely lost in Shimokitazawa's vintage shops.</p>
+      <p data-en="If Osaka fed us and Kyoto quieted us and Nara charmed us, Tokyo finished us off — in the best possible way." data-pl="Jeśli Osaka nas nakarmiła, Kioto wyciszyło, a Nara oczarowała, Tokio nas dobił — w najlepszy możliwy sposób.">If Osaka fed us and Kyoto quieted us and Nara charmed us, Tokyo finished us off — in the best possible way.</p>
     </div>
   </div>
   <div class="story-img tall">
@@ -618,49 +640,49 @@
 
 <!-- MOMENTS GRID -->
 <div class="moments-header">
-  <p class="section-eyebrow" data-en="Quick moments" data-pl="Szybkie Chwile">Quick moments</p>
+  <p class="section-eyebrow" data-en="Quick moments" data-pl="Szybkie chwile">Quick moments</p>
   <h2 style="font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:300;" data-en="Frames from the trip" data-pl="Kadry z podróży">Frames from the trip</h2>
 </div>
 <div class="moments-grid">
   <div class="moment-card">
     <img src="https://images.pexels.com/photos/20882137/pexels-photo-20882137.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Cherry blossom close"/>
-    <div class="moment-overlay"><div class="moment-tag" data-en="Kyoto" data-pl="Kioto">Kyoto</div><div class="moment-title" data-en="Sakura in full bloom" data-pl="Sakura w pełnym rozkwicie">Sakura in full bloom</div></div>
+    <div class="moment-overlay"><div class="moment-tag">Kyoto</div><div class="moment-title" data-en="Sakura in full bloom" data-pl="Sakura w pełnym rozkwicie">Sakura in full bloom</div></div>
   </div>
   <div class="moment-card">
     <img src="https://images.pexels.com/photos/3408348/pexels-photo-3408348.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Nara deer close"/>
-    <div class="moment-overlay"><div class="moment-tag" data-en="Nara" data-pl="Nara">Nara</div><div class="moment-title" data-en="Eye to eye with a deer" data-pl="Twarzą w twarz z jeleniem">Eye to eye with a deer</div></div>
+    <div class="moment-overlay"><div class="moment-tag">Nara</div><div class="moment-title" data-en="Eye to eye with a deer" data-pl="Oko w oko z jeleniem">Eye to eye with a deer</div></div>
   </div>
   <div class="moment-card">
     <img src="https://images.pexels.com/photos/12544943/pexels-photo-12544943.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Fuji pagoda aerial"/>
-    <div class="moment-overlay"><div class="moment-tag" data-en="Fuji-san" data-pl="Fuji-san">Fuji-san</div><div class="moment-title" data-en="Chureito pagoda view" data-pl="Widok pagody Chureito">Chureito pagoda view</div></div>
+    <div class="moment-overlay"><div class="moment-tag">Fuji-san</div><div class="moment-title" data-en="Chureito pagoda view" data-pl="Widok pagody Chureito">Chureito pagoda view</div></div>
   </div>
   <div class="moment-card">
     <img src="https://images.pexels.com/photos/31008030/pexels-photo-31008030.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Osaka aerial night"/>
-    <div class="moment-overlay"><div class="moment-tag" data-en="Osaka" data-pl="Osaka">Osaka</div><div class="moment-title" data-en="City lights from above" data-pl="Światła miasta z góry">City lights from above</div></div>
+    <div class="moment-overlay"><div class="moment-tag">Osaka</div><div class="moment-title" data-en="City lights from above" data-pl="Światła miasta z góry">City lights from above</div></div>
   </div>
   <div class="moment-card">
     <img src="https://images.pexels.com/photos/16412320/pexels-photo-16412320.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Kinkaku-ji reflection"/>
-    <div class="moment-overlay"><div class="moment-tag" data-en="Kyoto" data-pl="Kioto">Kyoto</div><div class="moment-title" data-en="Golden Pavilion at dawn" data-pl="Złoty Pawilon o świcie">Golden Pavilion at dawn</div></div>
+    <div class="moment-overlay"><div class="moment-tag">Kyoto</div><div class="moment-title" data-en="Golden Pavilion at dawn" data-pl="Złoty Pawilon o świcie">Golden Pavilion at dawn</div></div>
   </div>
   <div class="moment-card">
     <img src="https://images.pexels.com/photos/31037835/pexels-photo-31037835.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Fuji convenience store"/>
-    <div class="moment-overlay"><div class="moment-tag" data-en="Fujiyoshida" data-pl="Fujiyoshida">Fujiyoshida</div><div class="moment-title" data-en="The iconic Fuji shot" data-pl="Ikoniczny kadr Fuji">The iconic Fuji shot</div></div>
+    <div class="moment-overlay"><div class="moment-tag">Fujiyoshida</div><div class="moment-title" data-en="The iconic Fuji shot" data-pl="Kultowe zdjęcie Fuji">The iconic Fuji shot</div></div>
   </div>
 </div>
 
 <!-- CLOSING -->
 <section class="closing">
-  <div class="closing-quote" data-en="Japan doesn't just impress you — it recalibrates you." data-pl="Japonia nie tylko Cię imponuje — recalibruje Cię.">
-    <span data-en="Japan doesn't just impress you —" data-pl="Japonia nie tylko Cię imponuje —">Japan doesn't just impress you —</span>
-    <span data-en="it recalibrates you." data-pl="recalibruje Cię.">it recalibrates you.</span>
+  <div class="closing-quote" data-en="&quot;Japan doesn't just impress you —<span>it recalibrates you.&quot;</span>" data-pl="„Japonia nie tylko robi na tobie wrażenie —<span>ona cię rekalibruje."</span>">
+    "Japan doesn't just impress you —
+    <span>it recalibrates you."</span>
   </div>
   <div>
     <div class="closing-text">
-      <p data-en="Two weeks was not enough. It never is with Japan. You leave with a list that's longer than the one you arrived with — more places to return to, more foods to try, more neighbourhoods to wander through." data-pl="Dwa tygodnie to było za mało. Nigdy nie jest wystarczająco w Japonii. Wyjeżdżasz z listą, która jest dłuższa niż ta, z którą przyjechałem — więcej miejsc do powrotu, więcej jedzenia do spróbowania, więcej dzielnic do wędrowania.">Two weeks was not enough. It never is with Japan. You leave with a list that's longer than the one you arrived with — more places to return to, more foods to try, more neighbourhoods to wander through.</p>
-      <p data-en="The politeness, the obsessive care in everything — the perfectly wrapped convenience store onigiri, the train that apologised for being thirty seconds late, the ryokan owner who left a hand-written note explaining every detail of breakfast — all of it adds up to something hard to name but easy to feel." data-pl="Uprzejmość, obsesyjna opieka w każdym — idealnie zapakowany onigiri ze sklepu, pociąg, który przeprosił za opóźnienie o trzydzieści sekund, właściciel ryokanu, który zostawił odręczną notatkę wyjaśniającą każdy szczegół śniadania — wszystko to sumuje się do czegoś trudnego do nazwania, ale łatwego do odczucia.">The politeness, the obsessive care in everything — the perfectly wrapped convenience store onigiri, the train that apologised for being thirty seconds late, the ryokan owner who left a hand-written note explaining every detail of breakfast — all of it adds up to something hard to name but easy to feel.</p>
-      <p data-en="We'll be back. That's not a question." data-pl="Wrócimy. To nie jest pytanie.">We'll be back. That's not a question.</p>
+      <p data-en="Two weeks was not enough. It never is with Japan. You leave with a list that's longer than the one you arrived with — more places to return to, more foods to try, more neighbourhoods to wander through." data-pl="Dwa tygodnie to za mało. Z Japonią zawsze tak jest. Wyjeżdżasz z listą dłuższą niż ta, z którą przyjechałeś — więcej miejsc do odwiedzenia, więcej jedzenia do spróbowania, więcej dzielnic do przemierzenia.">Two weeks was not enough. It never is with Japan. You leave with a list that's longer than the one you arrived with — more places to return to, more foods to try, more neighbourhoods to wander through.</p>
+      <p data-en="The politeness, the obsessive care in everything — the perfectly wrapped convenience store onigiri, the train that apologised for being thirty seconds late, the ryokan owner who left a hand-written note explaining every detail of breakfast — all of it adds up to something hard to name but easy to feel." data-pl="Uprzejmość, obsesyjna dbałość o wszystko — idealne opakowanie onigiri z convenience store, pociąg, który przeprosił za trzydzieści sekund opóźnienia, właściciel ryokanu, który zostawił odręczną notatkę wyjaśniającą każdy szczegół śniadania — to wszystko składa się na coś trudnego do nazwania, ale łatwego do poczucia.">The politeness, the obsessive care in everything — the perfectly wrapped convenience store onigiri, the train that apologised for being thirty seconds late, the ryokan owner who left a hand-written note explaining every detail of breakfast — all of it adds up to something hard to name but easy to feel.</p>
+      <p data-en="We'll be back. That's not a question." data-pl="Wrócimy. To nie pytanie.">We'll be back. That's not a question.</p>
     </div>
-    <div class="closing-sig" data-en="— rafseven4, April 2024" data-pl="— rafseven4, Kwiecień 2024">— rafseven4, April 2024</div>
+    <div class="closing-sig" data-en="— rafseven4, April 2024" data-pl="— rafseven4, kwiecień 2024">— rafseven4, April 2024</div>
   </div>
 </section>
 
@@ -678,8 +700,8 @@
     <svg id="pause-icon" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
   </button>
   <div class="player-info">
-    <div class="player-title" data-en="Japanese Ambient" data-pl="Japońska Ambientalna">Japanese Ambient</div>
-    <div class="player-sub" data-en="Traditional · Instrumental" data-pl="Tradycyjny · Instrumentalny">Traditional · Instrumental</div>
+    <div class="player-title">Japanese Ambient</div>
+    <div class="player-sub">Traditional · Instrumental</div>
   </div>
   <div class="player-bars paused" id="bars">
     <div class="bar"></div>
@@ -698,74 +720,62 @@
 </audio>
 
 <script>
-// ═════════════════════════════════════════════════════════════════════
-// LANGUAGE SYSTEM
-// ═════════════════════════════════════════════════════════════════════
+  const audio    = document.getElementById('japan-audio');
+  const playBtn  = document.getElementById('play-btn');
+  const playIcon = document.getElementById('play-icon');
+  const pauseIcon= document.getElementById('pause-icon');
+  const bars     = document.getElementById('bars');
+  const volSlider= document.getElementById('vol-slider');
 
-let currentLang = localStorage.getItem('lang') || 'en';
+  audio.volume = 0.5;
 
-function setLanguage(lang) {
-  currentLang = lang;
-  localStorage.setItem('lang', lang);
-  
-  document.documentElement.lang = lang === 'pl' ? 'pl' : 'en';
-  
-  // Update all elements with data attributes
-  document.querySelectorAll('[data-en][data-pl]').forEach(el => {
-    const textContent = el.getAttribute(`data-${lang}`);
-    if (textContent) {
-      if (el.children.length === 0) {
-        el.textContent = textContent;
-      } else {
-        for (let node of el.childNodes) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            node.textContent = textContent;
-            break;
-          }
-        }
-      }
+  playBtn.addEventListener('click', () => {
+    if (audio.paused) {
+      audio.play();
+      playIcon.style.display  = 'none';
+      pauseIcon.style.display = 'block';
+      bars.classList.remove('paused');
+    } else {
+      audio.pause();
+      playIcon.style.display  = 'block';
+      pauseIcon.style.display = 'none';
+      bars.classList.add('paused');
     }
   });
-}
 
-// Language toggle button
-document.getElementById('lang-btn').addEventListener('click', () => {
-  setLanguage(currentLang === 'en' ? 'pl' : 'en');
-});
+  volSlider.addEventListener('input', () => {
+    audio.volume = volSlider.value;
+  });
 
-// ═════════════════════════════════════════════════════════════════════
-// MUSIC PLAYER
-// ═════════════════════════════════════════════════════════════════════
-
-const audio    = document.getElementById('japan-audio');
-const playBtn  = document.getElementById('play-btn');
-const playIcon = document.getElementById('play-icon');
-const pauseIcon= document.getElementById('pause-icon');
-const bars     = document.getElementById('bars');
-const volSlider= document.getElementById('vol-slider');
-
-audio.volume = 0.5;
-
-playBtn.addEventListener('click', () => {
-  if (audio.paused) {
-    audio.play();
-    playIcon.style.display  = 'none';
-    pauseIcon.style.display = 'block';
-    bars.classList.remove('paused');
-  } else {
-    audio.pause();
-    playIcon.style.display  = 'block';
-    pauseIcon.style.display = 'none';
-    bars.classList.add('paused');
+  // ── LANGUAGE TOGGLE ──
+  function applyLang(lang) {
+    document.querySelectorAll('[data-en]').forEach(el => {
+      const txt = el.getAttribute('data-' + lang);
+      if (!txt) return;
+      const isHeading = ['H1','H2','H3'].includes(el.tagName);
+      if (isHeading || el.classList.contains('closing-quote') || el.classList.contains('story-quote')) {
+        el.innerHTML = txt;
+      } else {
+        el.innerHTML = txt;
+      }
+    });
+    localStorage.setItem('rafseven4-lang', lang);
   }
-});
 
-volSlider.addEventListener('input', () => {
-  audio.volume = volSlider.value;
-});
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyLang(btn.dataset.lang);
+    });
+  });
 
-// Uruchom język przy starcie
-setLanguage(currentLang);
+  // Restore saved language
+  const savedLang = localStorage.getItem('rafseven4-lang');
+  if (savedLang && savedLang !== 'en') {
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === savedLang));
+    applyLang(savedLang);
+  }
 </script>
 
 </body>
