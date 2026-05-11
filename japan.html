@@ -489,7 +489,7 @@
     </div>
   </div>
   <div class="intro-img-wrap">
-    <img src="img/IMG_4679.JPEG" alt="Temple entrance" class="intro-img"/>
+    <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=500" alt="Temple entrance" class="intro-img"/>
     <div class="intro-img-caption" data-en="Kyoto Temple" data-pl="Świątynia w Kioto">Kyoto Temple</div>
   </div>
 </div>
@@ -733,9 +733,6 @@ document.getElementById('lang-btn').addEventListener('click', () => {
   setLanguage(currentLang === 'en' ? 'pl' : 'en');
 });
 
-// Apply language on load
-setLanguage(currentLang);
-
 // ═════════════════════════════════════════════════════════════════════
 // MUSIC PLAYER
 // ═════════════════════════════════════════════════════════════════════
@@ -766,6 +763,9 @@ playBtn.addEventListener('click', () => {
 volSlider.addEventListener('input', () => {
   audio.volume = volSlider.value;
 });
+
+// Uruchom język przy starcie
+setLanguage(currentLang);
 </script>
 
 </body>
